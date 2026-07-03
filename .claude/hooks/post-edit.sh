@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # PostToolUse hook — corre tras cada Edit/Write.
-# HOY: lint de Python (ruff) cuando exista .py; validación ligera de enlaces Markdown.
-# Los tests (pytest) completos se activan en Estación 5, con código.
+#   .py → autoformatea (ruff format) + autofix seguro (ruff check --fix); bloquea si quedan errores.
+#   .md → valida enlaces relativos .md que podrían estar rotos.
+# Los tests (pytest) completos se activan en Construction, con código.
 set -uo pipefail
 
 payload="$(cat)"
@@ -14,15 +15,16 @@ fi
 
 case "$file" in
   *.py)
-    if command -v ruff >/dev/null 2>&1; then
-      if ! ruff check "$file"; then
-        echo "❌ ruff falló en $file — corrige antes de continuar." >&2
-        exit 2
-      fi
+    command -v ruff >/dev/null 2>&1 || exit 0
+    ruff format "$file" >/dev/null 2>&1 || true        # autoformatea
+    ruff check --fix "$file" >/dev/null 2>&1 || true   # autofix seguro
+    # ¿quedan errores que ruff no puede arreglar solo? Los diagnósticos van a stderr → el modelo los ve.
+    if ! ruff check "$file" >&2; then
+      echo "❌ ruff: quedan problemas en $file que requieren tu atención." >&2
+      exit 2
     fi
     ;;
   *.md)
-    # Chequeo ligero de enlaces relativos a .md que podrían estar rotos.
     grep -oE '\]\(([^)]+\.md)\)' "$file" 2>/dev/null | sed -E 's/\]\(|\)//g' | while read -r link; do
       case "$link" in http*|\#*|"") continue;; esac
       target="$(dirname "$file")/$link"
