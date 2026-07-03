@@ -1,0 +1,42 @@
+# Node / TypeScript
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+.next/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Secretos (mismo criterio que los deny de .claude/settings.json)
+.env
+.env.*
+*.env
+*.pem
+secrets.env
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Datos / artefactos locales (corpus, índices, resultados de eval)
+data/
+corpus/
+*.faiss
+*.duckdb
+*.sqlite
+eval-runs/
+
+# IaC
+.terraform/
+*.tfstate
+*.tfstate.*
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+*.log
