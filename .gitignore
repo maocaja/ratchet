@@ -22,9 +22,10 @@ secrets.env
 .ruff_cache/
 .mypy_cache/
 
-# Datos / artefactos locales (corpus, índices, resultados de eval)
-data/
-corpus/
+# Datos / artefactos locales de runtime (índices, resultados de eval)
+# Anclados al root para NO ignorar el seed versionado en seeds/ (CG-4).
+/data/
+/corpus/
 *.faiss
 *.duckdb
 *.sqlite

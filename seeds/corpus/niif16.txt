@@ -1,0 +1,8 @@
+[EJEMPLO — VERSIÓN VIEJA/DEROGADA de NIIF 16]
+
+Este archivo representa el estado INICIAL del corpus: la versión antigua del
+documento NIIF 16 que el RAG está citando (la "fuente-vieja"). Reemplázalo con
+el texto real de la versión derogada.
+
+Cuando Ratchet detecte la caída de recall y localice "fuente-vieja", el parche
+reemplazará este archivo por el de seeds/corpus_vigente/niif16.txt.
