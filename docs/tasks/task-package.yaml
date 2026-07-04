@@ -1,0 +1,59 @@
+# Planning wave — U1 · Camino NIIF (contrato OpenSymphony)
+# Fuente: specs AI-DLC de aidlc-docs/construction/u1-camino-niif/ + code-generation-plan.
+# Generado en Fase A (E7) — descomposición operable de U1. NO ejecuta código.
+
+planningWave: u1-camino-niif-implementation
+tasksDir: docs/tasks
+targetRepo: ratchet
+unit: "U1 · Camino NIIF (walking skeleton, rama de datos)"
+
+milestones:
+  - "M0: Datos (curación humana)"
+  - "M1: Núcleo determinista (libre-de-LLM)"
+  - "M2: Datos y loop"
+  - "M3: Superficie y demo (CLI + reporte HTML)"
+
+tasks:
+  - id: TASK-000
+    file: docs/tasks/000-curacion-datos.md
+    milestone: "M0: Datos (curación humana)"
+    owner: "humano (Mauricio)"
+  - id: TASK-001
+    file: docs/tasks/001-scaffold-import-linter.md
+    milestone: "M1: Núcleo determinista (libre-de-LLM)"
+  - id: TASK-002
+    file: docs/tasks/002-domain-types.md
+    milestone: "M1: Núcleo determinista (libre-de-LLM)"
+  - id: TASK-003
+    file: docs/tasks/003-evaluator-recall-span.md
+    milestone: "M1: Núcleo determinista (libre-de-LLM)"
+  - id: TASK-004
+    file: docs/tasks/004-gate-no-regresion.md
+    milestone: "M1: Núcleo determinista (libre-de-LLM)"
+  - id: TASK-005
+    file: docs/tasks/005-persistence-runrepository.md
+    milestone: "M2: Datos y loop"
+  - id: TASK-006
+    file: docs/tasks/006-registry-golden-set.md
+    milestone: "M2: Datos y loop"
+  - id: TASK-007
+    file: docs/tasks/007-adapter-rag-muestra.md
+    milestone: "M2: Datos y loop"
+  - id: TASK-008
+    file: docs/tasks/008-investigator-localizador.md
+    milestone: "M2: Datos y loop"
+  - id: TASK-009
+    file: docs/tasks/009-monitor.md
+    milestone: "M2: Datos y loop"
+  - id: TASK-010
+    file: docs/tasks/010-reporter.md
+    milestone: "M2: Datos y loop"
+  - id: TASK-011
+    file: docs/tasks/011-orchestrator-loop.md
+    milestone: "M2: Datos y loop"
+  - id: TASK-012
+    file: docs/tasks/012-api-cli-reporte-html.md
+    milestone: "M3: Superficie y demo (CLI + reporte HTML)"
+  - id: TASK-013
+    file: docs/tasks/013-e2e-niif-ci.md
+    milestone: "M3: Superficie y demo (CLI + reporte HTML)"

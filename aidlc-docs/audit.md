@@ -224,3 +224,28 @@
 **Context:** Checklist E6 (scaffolding) cerrado. Implementación (código) sigue en pausa, lista para E7.
 
 ---
+
+## Estación 7 — Fase A: Planning wave (docs, sin código, sin herramientas externas)
+**Timestamp**: 2026-07-04 (fecha lógica)
+**User Input**: "vamos con la Fase A".
+**AI Response**: Generado el planning wave de U1 en `docs/tasks/` (contrato OpenSymphony), descomponiendo las specs de U1 en cola ejecutable. NADA de código, no levanta la pausa, no toca src/.
+- `orchestration-map.md` — mapa de orquestación (intención/contexto/scope/deps/ejecución/validación/review/memoria) + DAG.
+- `task-package.yaml` — manifiesto (planningWave u1-camino-niif-implementation, 3 milestones, 13 tasks).
+- `milestones.md` — M1 núcleo determinista · M2 datos y loop · M3 superficie y demo.
+- `001-*.md`..`013-*.md` — 13 task files con contrato OpenSymphony (frontmatter id/milestone/priority/estimate/blockedBy/blocks/parent + Summary/Scope/Deliverables/Acceptance/Test Plan/Context/Definition of Ready), atados a BR-xx/NFR-U1-xx/CG-x.
+- `validation.md` — validación manual (dry-run equivalente): 13/13 archivos, milestones cuadran, DAG sin ciclos, 9 olas de despacho.
+**Pendiente (fuera de Fase A):** Fase B (publicar a Linear, AI PR review, memoria — requiere cuentas/herramientas externas) y Fase C (ejecución = levanta la pausa de código).
+**Context**: E7 Fase A completa. Cola lista para publicar/ejecutar cuando se decidan Fase B/C.
+
+---
+
+## Estación 7 — Fase A: fixes de review (insumos humanos + CG-2)
+**Timestamp**: 2026-07-04 (fecha lógica)
+**AI Response**: Tras review del planning wave:
+- 🔴 Los insumos humanos (golden set ≥50 + corpus NIIF par vieja/nueva) estaban como nota, no como tarea. Elevados a **TASK-000 (M0: Datos, owner=humano, estimate 8, blocks TASK-006/007)** — ruta crítica, arranca en paralelo con M1, bloquea el demo si no arranca ya. Enlazado en blockedBy de 006/007 + DoR actualizados.
+- 🟡 CG-2 (constructor no acepta LlmPort — inyección runtime que import-linter no atrapa): ahora acceptance explícito en **TASK-004 (gate)** además de TASK-011 (orchestrator).
+- 🟢 dataviz: nota en TASK-012 (invocar skill dataviz antes del chart del reporte HTML). Calendario/ruta crítica añadido a validation.md (Wave 0, riesgo #1 = TASK-000).
+Re-validado: 14/14 tareas, 4 milestones, DAG acíclico, CG-2 en 004+011.
+**Context**: E7 Fase A robustecida. Cola completa y honesta (incluye el trabajo humano de datos).
+
+---
