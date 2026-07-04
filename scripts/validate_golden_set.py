@@ -19,9 +19,9 @@ from pathlib import Path
 import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
-GS = ROOT / "data" / "golden_set_niif.yaml"
-CORPUS_VIGENTE = ROOT / "data" / "corpus_vigente"
-CORPUS = ROOT / "data" / "corpus"
+GS = ROOT / "seeds" / "golden_set_niif.yaml"
+CORPUS_VIGENTE = ROOT / "seeds" / "corpus_vigente"
+CORPUS = ROOT / "seeds" / "corpus"
 MIN_ITEMS = 50
 
 

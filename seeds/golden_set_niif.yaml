@@ -1,0 +1,40 @@
+# Golden Set — Camino NIIF (U1) · TASK-000 / RAT-5
+#
+# ⚠️ LA VERDAD LA DEFINES TÚ (BR-76). Los ítems de abajo son EJEMPLOS ilustrativos
+#    con contenido placeholder — reemplázalos/expándelos con NIIF real y valida los offsets.
+#
+# Requisitos (acceptance RAT-5):
+#   - ≥50 ítems (aquí van 2 de ejemplo; faltan ≥48)
+#   - cada gold_span: offsets de carácter REALES sobre seeds/corpus/<doc_id>.txt, con text exacto
+#   - ≥1 ítem critical: true   ·   ≥1 ítem ligado a NIIF 16
+#   - Guía léxica (BM25): la pregunta comparte vocabulario con gold_span.text
+#
+# Valida con:  python scripts/validate_golden_set.py
+
+version: 1
+items:
+  # ── EJEMPLO 1 (crítico, ligado a NIIF 16 — el del escenario) ──────────────
+  - item_id: niif16-plazo-arrendamiento
+    question: "¿Cómo se determina el plazo del arrendamiento según la NIIF 16?"   # comparte vocabulario con el span
+    answer: "[EJEMPLO — respuesta de referencia humana; reemplazar]"
+    gold_span:
+      doc_id: niif16                 # → seeds/corpus/niif16.txt
+      start: 0                       # ⚠️ offset REAL a validar contra el texto
+      end: 0
+      text: "[EJEMPLO — copiar el texto dorado EXACTO del corpus vigente]"
+    critical: true
+    slice: niif16
+
+  # ── EJEMPLO 2 (no crítico, otra rebanada) ────────────────────────────────
+  - item_id: nia315-riesgo-inherente
+    question: "¿Qué es el riesgo inherente según la NIA 315?"
+    answer: "[EJEMPLO — reemplazar]"
+    gold_span:
+      doc_id: nia315                 # → seeds/corpus/nia315.txt
+      start: 0
+      end: 0
+      text: "[EJEMPLO — texto dorado exacto]"
+    critical: false
+    slice: nia
+
+  # ── … faltan ≥48 ítems más (curación humana) ─────────────────────────────

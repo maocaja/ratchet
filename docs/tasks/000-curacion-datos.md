@@ -17,8 +17,8 @@ Producir los **dos insumos humanos** de U1, que un agente de código **no puede 
 - Curar el golden set NIIF y el corpus de muestra. **Reservado:** no es trabajo de agente; es curación experta humana. Los agentes de código consumen estos archivos como seed, no los generan.
 
 ## Deliverables
-1. **Golden set NIIF** (`data/golden_set_niif.yaml` o similar): **≥50 ítems**, cada uno con `{question, answer, gold_span=(doc_id, start, end, text), critical}`, dimensionado por rebanada (≥50 por rebanada de la que se afirme algo). Incluye la **clase crítica** marcada y al menos un ítem que dependa de NIIF 16.
-2. **Corpus NIIF/NIA de muestra** (`data/corpus/`): documentos fuente, con el **par NIIF 16 "vieja" (derogada) y "nueva" (vigente)** — la vieja es la regresión sembrada que hace `span_vigente_en_corpus=False` y dispara "fuente-vieja".
+1. **Golden set NIIF** (`seeds/golden_set_niif.yaml` o similar): **≥50 ítems**, cada uno con `{question, answer, gold_span=(doc_id, start, end, text), critical}`, dimensionado por rebanada (≥50 por rebanada de la que se afirme algo). Incluye la **clase crítica** marcada y al menos un ítem que dependa de NIIF 16.
+2. **Corpus NIIF/NIA de muestra** (`seeds/corpus/`): documentos fuente, con el **par NIIF 16 "vieja" (derogada) y "nueva" (vigente)** — la vieja es la regresión sembrada que hace `span_vigente_en_corpus=False` y dispara "fuente-vieja".
 
 ## Acceptance Criteria
 - Golden set con **≥50** ítems válidos (offsets de carácter reales sobre el corpus, `len>0`), clase crítica marcada.

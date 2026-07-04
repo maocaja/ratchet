@@ -1,0 +1,6 @@
+[EJEMPLO — VERSIÓN VIGENTE de NIIF 16]
+
+Este archivo representa la versión CORRECTA/vigente de NIIF 16 — a la que apuntan
+los gold_span del golden set. Reemplázalo con el texto real vigente.
+
+El parche de datos (rama de U1) reemplaza seeds/corpus/niif16.txt por este.

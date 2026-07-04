@@ -14,7 +14,7 @@ Implementar `GoldenSetRegistry`: curar/versionar el golden set (≥50, span-etiq
 
 ## Scope
 - `src/ratchet/registry/`: `save_golden_set`, `get_golden_set`, `set_baseline`, `get_baseline`.
-- Seed: `data/golden_set_niif.yaml` (o similar) versionado en el repo, con ≥50 ítems span-etiquetados, incluyendo la clase crítica y el caso NIIF 16.
+- Seed: `seeds/golden_set_niif.yaml` (o similar) versionado en el repo, con ≥50 ítems span-etiquetados, incluyendo la clase crítica y el caso NIIF 16.
 - **Reservado:** el golden set es la verdad humana; no se recomputa (CG-4).
 
 ## Deliverables
