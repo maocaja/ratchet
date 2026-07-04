@@ -1,0 +1,87 @@
+planningWave: u1-camino-niif-implementation
+linearProject: u1-camino-niif-a0fbff3f7b6e
+publishedAt: '2026-07-04T20:29:50.398272+00:00'
+milestones:
+  "M0: Datos (curaci\xF3n humana)":
+    milestoneId: e6466d6f-55b8-43ea-9a99-250c07acbc8f
+    name: "M0: Datos (curaci\xF3n humana)"
+  "M1: N\xFAcleo determinista (libre-de-LLM)":
+    milestoneId: cbffe6c4-ebc3-4419-a8bb-5bbc39eb78bb
+    name: "M1: N\xFAcleo determinista (libre-de-LLM)"
+  'M2: Datos y loop':
+    milestoneId: be2b7f40-ba50-4c6d-8799-37a646e9e0a3
+    name: 'M2: Datos y loop'
+  'M3: Superficie y demo (CLI + reporte HTML)':
+    milestoneId: aa863431-314d-49d1-abed-85a24a3ca6ca
+    name: 'M3: Superficie y demo (CLI + reporte HTML)'
+tasks:
+  TASK-000:
+    issue: RAT-5
+    issueId: 7f46baba-fe38-42ea-94f3-afbfbfff99eb
+    url: https://linear.app/ratchet/issue/RAT-5/curacion-de-datos-golden-set-niif-50-corpus-de-muestra-par-niif-16
+    file: docs/tasks/000-curacion-datos.md
+  TASK-001:
+    issue: RAT-6
+    issueId: 7e868a3c-bdb4-4f00-94b9-2226aa5620d5
+    url: https://linear.app/ratchet/issue/RAT-6/scaffold-import-linter-fail-closed-g2
+    file: docs/tasks/001-scaffold-import-linter.md
+  TASK-002:
+    issue: RAT-7
+    issueId: 751befbe-03fd-49d4-b214-546baa9e99bf
+    url: https://linear.app/ratchet/issue/RAT-7/tipos-de-dominio-domain
+    file: docs/tasks/002-domain-types.md
+  TASK-003:
+    issue: RAT-8
+    issueId: e79bb56f-ebcd-422d-8510-d52a363db2cc
+    url: https://linear.app/ratchet/issue/RAT-8/evaluator-recall-por-span-statehasher-bootstrapestimator
+    file: docs/tasks/003-evaluator-recall-span.md
+  TASK-007:
+    issue: RAT-9
+    issueId: a4733b78-035d-4070-b414-652d1e7bd146
+    url: https://linear.app/ratchet/issue/RAT-9/adapter-ragpatientport-rag-de-muestra-generate-stub-retrypolicy
+    file: docs/tasks/007-adapter-rag-muestra.md
+  TASK-004:
+    issue: RAT-10
+    issueId: 47a58d84-daad-4b48-9154-2b5ea459b49e
+    url: https://linear.app/ratchet/issue/RAT-10/gate-no-regresion-revert-guardrail-critico
+    file: docs/tasks/004-gate-no-regresion.md
+  TASK-005:
+    issue: RAT-11
+    issueId: d0eb0e97-caed-45dd-93a2-71275782dba7
+    url: https://linear.app/ratchet/issue/RAT-11/persistence-runrepository-fake-uniquestatekey
+    file: docs/tasks/005-persistence-runrepository.md
+  TASK-008:
+    issue: RAT-12
+    issueId: fb1e6088-9130-4184-b137-846015667b69
+    url: https://linear.app/ratchet/issue/RAT-12/investigator-probetoolkit-localizer-verify-claim-read-only-g3
+    file: docs/tasks/008-investigator-localizador.md
+  TASK-006:
+    issue: RAT-13
+    issueId: c8eb5a98-2a00-48a4-b733-9f3e8ed2b2fa
+    url: https://linear.app/ratchet/issue/RAT-13/registry-golden-set-50-seed-desde-repo-baseline
+    file: docs/tasks/006-registry-golden-set.md
+  TASK-010:
+    issue: RAT-14
+    issueId: 5f693b2e-43c5-424b-80f7-d654b9cfb3b4
+    url: https://linear.app/ratchet/issue/RAT-14/reporter-writeup-build-report-approvalservice
+    file: docs/tasks/010-reporter.md
+  TASK-009:
+    issue: RAT-15
+    issueId: 0ae552af-a580-401e-9a0f-5bf09940ac5e
+    url: https://linear.app/ratchet/issue/RAT-15/monitor-deteccion-de-caida-vs-baseline
+    file: docs/tasks/009-monitor.md
+  TASK-011:
+    issue: RAT-16
+    issueId: 96e543ec-0e2b-46cf-bdef-37884588327e
+    url: https://linear.app/ratchet/issue/RAT-16/orchestrator-looporchestrator-g2-test-no-inyeccion-llmport
+    file: docs/tasks/011-orchestrator-loop.md
+  TASK-012:
+    issue: RAT-17
+    issueId: 484564a1-f937-4bcf-9e8d-875cea2b05de
+    url: https://linear.app/ratchet/issue/RAT-17/api-cli-runapprovereport-render-de-reporte-html
+    file: docs/tasks/012-api-cli-reporte-html.md
+  TASK-013:
+    issue: RAT-18
+    issueId: 3d87c83c-e246-4096-b68f-af3c3265ab87
+    url: https://linear.app/ratchet/issue/RAT-18/e2e-niif-hermetico-ci-completa
+    file: docs/tasks/013-e2e-niif-ci.md
