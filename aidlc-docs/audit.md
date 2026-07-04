@@ -249,3 +249,14 @@ Re-validado: 14/14 tareas, 4 milestones, DAG acíclico, CG-2 en 004+011.
 **Context**: E7 Fase A robustecida. Cola completa y honesta (incluye el trabajo humano de datos).
 
 ---
+
+## Estación 7 — Decisión de arnés (ejecución)
+**Timestamp**: 2026-07-04 (fecha lógica)
+**User Input**: elección de suscripción/arnés = "ChatGPT Pro + Codex CLI".
+**Decisión (regla limpia, no proveedor congelado):** el arnés = el de la suscripción que se paga. Elegido **ChatGPT Pro + Codex CLI** por costo para code-gen orquestado (+ Codex Code Review tier gratis). Patrón **híbrido**: 1 tarea autónoma con OpenSymphony (aprender el patrón E7) + 13 tareas **semi-manuales** despachadas en Codex con el task-package como checklist. Cap de gasto obligatorio. **Palanca real de ahorro = Ratchet hermético** (núcleo/CI se testean sin tokens), no la elección de proveedor.
+**Correcciones de review incorporadas:** "orquestar con Claude → API por token" era falso en general (solo aplica a orquestadores terceros como OpenSymphony); Claude Code orquesta sobre Max a costo plano. Datos de costo del WhatsApp = señales con margen de error → **re-verificar precios al ejecutar**.
+**Setup pendiente (lo hace el usuario):** suscribir ChatGPT Pro, instalar/auth Codex CLI, cap de gasto, arrancar TASK-000 (curación datos, humano, ruta crítica) en paralelo. OpenSymphony/Linear solo para la 1 tarea autónoma.
+**Nota de rol:** a partir de aquí el código lo escribe Codex (arnés elegido); rol de este asistente (Claude Code) = apoyo (review con subagentes, config puntual, specs/bitácora).
+**Context**: E7 — arnés decidido. Ejecución en manos del usuario + Codex.
+
+---

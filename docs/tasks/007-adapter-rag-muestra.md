@@ -17,7 +17,7 @@ Implementar el puerto `RagPatientPort` y una impl. de **RAG de muestra in-proces
 - **Reservado (CG-1):** `RetryPolicy` NO envuelve `apply_data_patch`/`reindex`.
 
 ## Deliverables
-- RAG de muestra con `retrieve()` **determinista** para índice fijo (precondición P-2).
+- RAG de muestra con **retriever léxico BM25/TF-IDF** (sin embeddings ni vector store); `retrieve()` **determinista** para índice fijo (precondición P-2); `reindex` = reconstruir el índice BM25. Retriever pluggable tras el puerto (swap a embeddings = fast-follow, P5).
 - `generate()` stub determinista (sin red — CG-3).
 - `corpus_fingerprint() -> list[(doc_id, doc_content)]` (contenido crudo; Ratchet hashea).
 - `supports_data_ops()=True`; parche + reindex reversibles.

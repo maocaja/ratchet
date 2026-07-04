@@ -49,7 +49,7 @@
 |---|---|---|
 | Rol | **sistema externo** detrás de `RagPatientPort`; el vector store es del RAG, NO de Ratchet | P5; costura |
 | Corpus | normas contables públicas **NIIF/NIA** (incluye NIIF 16 para el escenario de deriva) | dominio del PRD |
-| Vector store del RAG | **decisión diferida a Infrastructure/Code Gen** (candidato ligero: Chroma/FAISS embebido) | pertenece al RAG; se concreta al construir el paciente de muestra — **TBD** |
+| Retriever del RAG *(TBD resuelto 2026-07-04)* | **Léxico BM25/TF-IDF** (`rank_bm25` o sklearn), **sin embeddings ni vector store**. Retriever **pluggable tras el puerto** → swap a embeddings (Chroma + sentence-transformer local) = fast-follow sin tocar el core (P5) | de-riesga la tarea más grande + Demo Day; hermético y determinista por construcción (P-2); suficiente para recall-por-span. **Guía de curación:** las preguntas del golden set deben compartir vocabulario con el texto del span dorado |
 | **Determinismo del `retrieve` (requisito NFR-2)** | El adaptador debe garantizar `retrieve()` **determinista para un estado de índice fijo** (o Ratchet fija índice/orden). Si el store usa ANN no-determinista, se documenta la tolerancia | precondición de la garantía bit-exacta de recall |
 | **Huella del corpus (requisito NFR-2)** | `RagPatientPort` expone `corpus_fingerprint() -> list[(doc_id, doc_content: str)]` (contenido crudo); Ratchet normaliza+hashea con su `normalize()` (mismo de BL-1) | habilita la clave de idempotencia/reproducibilidad |
 | Data ops (G1) | el paciente propio **soporta** `supports_data_ops()` (reemplazo de doc + reindex) | habilita la rama de datos de U1 |

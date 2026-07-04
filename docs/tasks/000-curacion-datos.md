@@ -34,6 +34,7 @@ Producir los **dos insumos humanos** de U1, que un agente de código **no puede 
 ## Context
 - `functional-design/business-rules.md` BR-24, BR-76 · `.claude/rules/evaluacion.md` (golden set por span, clase crítica, ≥50 por rebanada)
 - `user-stories/stories.md` (escenario NIIF) · Carry-over CG-4
+- **⚠️ Guía de curación (retriever léxico BM25 — decidido 2026-07-04):** las **preguntas deben compartir vocabulario con el texto del span dorado** (BM25 recupera por coincidencia de palabras). Preguntas con sinónimos ausentes en la fuente → recall artificialmente bajo. Ver `tech-stack-decisions.md`.
 
 ## Definition of Ready
 Ninguna dependencia de código. Requiere criterio de dominio contable (NIIF/NIA). **Empezar de inmediato.**
