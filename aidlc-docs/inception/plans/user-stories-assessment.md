@@ -12,7 +12,7 @@
 
 ## Decision
 **Execute User Stories**: **Yes**
-**Reasoning**: sistema multi-persona con lógica de negocio crítica y de alto riesgo (garantías de no-regresión, aprobación humana). Las historias con criterios de aceptación son el puente directo al backlog (Prompt 3 / Estación 5) y protegen el entregable no-negociable (escenario NIIF).
+**Reasoning**: sistema multi-persona con lógica de negocio crítica y de alto riesgo (garantías de no-regresión, aprobación humana). Las historias con criterios de aceptación son el puente directo a **Construction (Estación 5)** — sus escenarios Gherkin se convierten en tests de aceptación — y protegen el entregable no-negociable (escenario NIIF). *(Corrección: según el runbook oficial de la Estación 4, **Estación 5 = Construction**, no un backlog Prompt-3 aparte; la descomposición en unidades/historias la produce Units Generation dentro de esta Inception.)*
 
 ## Expected Outcomes
 - Historias INVEST con criterios Gherkin, mapeadas a las 2 personas y trazadas a los FR.
