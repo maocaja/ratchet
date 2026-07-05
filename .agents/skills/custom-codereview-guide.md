@@ -2,12 +2,16 @@
 name: custom-codereview-guide
 description: |
   Repository-specific code review guidance for this project.
-  Update this file so OpenHands PR review focuses on the right risks.
+  Update this file so automated PR review focuses on the right risks.
+triggers:
+  - /codereview
 ---
 
 # Custom Code Review Guide
 
-OpenHands PR review will load this file when it is present. Replace this starter content with repository-specific expectations.
+Automated PR review reads this guidance: the OpenHands PR Review plugin loads it via the `/codereview` trigger, and Codex code review reaches it through the `## Review guidelines` section in `AGENTS.md`. Keep the `triggers` frontmatter: it scopes this content to review conversations so implementation agents do not carry it in context. Replace this starter content with repository-specific expectations.
+
+**This is a durable, shared document.** Never add PR-specific or ticket-specific content here — no "already resolved, do not re-flag" lists, no per-PR evidence dumps. Respond to review feedback in the PR's review threads instead. Only add guidance that applies to all future reviews.
 
 ## Default Priorities
 

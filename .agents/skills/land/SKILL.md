@@ -10,7 +10,7 @@ description:
 
 ## Goals
 
-- Ensure the PR is conflict-free with main.
+- Ensure the PR is conflict-free with the configured target branch.
 - Keep CI green and fix failures when they occur.
 - Address all review feedback.
 - Confirm PR is ready for merge (green CI, no unresolved comments).
@@ -27,9 +27,9 @@ description:
 2. Confirm the full gauntlet is green locally before any push.
 3. If the working tree has uncommitted changes, commit with the `commit` skill
    and push with the `push` skill before proceeding.
-4. Check mergeability and conflicts against main.
-5. If conflicts exist, use the `pull` skill to fetch/merge `origin/main` and
-   resolve conflicts, then use the `push` skill to publish the updated branch.
+4. Check mergeability and conflicts against the configured target branch.
+5. If conflicts exist, use the `pull` skill to fetch/merge `origin/<target-branch>`
+   and resolve conflicts, then use the `push` skill to publish the updated branch.
 6. Address any Linear issue comments and PR review comments before merging
    (see Review Handling below).
 7. Watch checks until complete.
@@ -60,6 +60,15 @@ branch=$(git branch --show-current)
 pr_number=$(gh pr view --json number -q .number)
 pr_title=$(gh pr view --json title -q .title)
 pr_body=$(gh pr view --json body -q .body)
+target_branch=$(awk -F': *' '/^Target branch:/ { branch=$2; gsub(/`/, "", branch); gsub(/\r/, "", branch); gsub(/^[ \t]+|[ \t]+$/, "", branch); print branch; exit }' WORKFLOW.md)
+if [ -z "$target_branch" ]; then
+  echo "WORKFLOW.md is missing a Target branch marker; run opensymphony update --target-branch <branch> before landing." >&2
+  exit 1
+fi
+current_base=$(gh pr view --json baseRefName -q .baseRefName)
+if [ "$current_base" != "$target_branch" ]; then
+  gh pr edit --base "$target_branch"
+fi
 
 # Check mergeability and conflicts
 mergeable=$(gh pr view --json mergeable -q .mergeable)
@@ -102,11 +111,12 @@ echo "**DO NOT MERGE** - the user reviews and merges."
 - Use judgment to identify flaky failures. If a failure is a flake (e.g., a
   timeout on only one platform), you may proceed without fixing it.
 - If CI pushes an auto-fix commit (authored by GitHub Actions), it does not
-  trigger a fresh CI run. Detect the updated PR head, pull locally, merge
-  `origin/main` if needed, add a real author commit, and force-push to retrigger
-  CI, then restart the checks loop.
+  trigger a fresh CI run. Detect the updated PR head, pull locally, merge the
+  configured target branch if needed, add a real author commit, and force-push
+  to retrigger CI, then restart the checks loop.
 - If all jobs fail with corrupted pnpm lockfile errors on the merge commit, the
-  remediation is to fetch latest `origin/main`, merge, force-push, and rerun CI.
+  remediation is to fetch latest `origin/<target-branch>`, merge, force-push,
+  and rerun CI.
 - If mergeability is `UNKNOWN`, wait and re-check.
 - Do not merge while review comments are outstanding.
 - Do not enable auto-merge; this repo has no required checks so auto-merge can
@@ -117,8 +127,10 @@ echo "**DO NOT MERGE** - the user reviews and merges."
 
 ## Review Handling
 
-This repo uses the OpenHands PR Review plugin for automated reviews. Reviews
-post as inline comments on specific lines of code.
+This repo uses an automated AI review provider configured under
+`Automated AI PR review` in `WORKFLOW.md`: either the OpenHands PR Review
+plugin (GitHub Actions) or Codex code review (Codex GitHub integration).
+Reviews post as inline comments on specific lines of code.
 
 Before inspecting GitHub review comments, fetch the latest Linear issue comments
 with `.agents/skills/linear/queries/issue_comments.graphql`. Treat unresolved,
@@ -127,8 +139,10 @@ has no new GitHub comments.
 
 ### AI Review Comments
 
-AI reviews are posted by GitHub Actions with `openhands-review` as the job name.
-They are advisory only and do not count as required approvals.
+AI reviews are posted by GitHub Actions with `openhands-review` as the job
+name (openhands provider) or by the Codex connector bot
+(`chatgpt-codex-connector`, codex provider). They are advisory only and do not
+count as required approvals.
 
 To address AI review feedback:
 1. Read the inline comment on the specific line
@@ -136,7 +150,14 @@ To address AI review feedback:
    is correct), or push back (disagree with reasoning)
 3. Reply inline to the review comment explaining your action
 4. If accepting, implement the fix, commit, and push
-5. Optionally re-trigger AI review by adding the `review-this` label
+5. After pushing follow-up commits, re-trigger AI review per the active
+   provider: add the `review-this` label (openhands) or post a comment that is
+   exactly `@codex review` (codex)
+
+Never ask the review bot to make code changes. In particular, never mention
+`@codex` with any text other than the exact phrase `@codex review`; other
+mentions start a Codex cloud task that bills general Codex usage and edits
+code outside this workspace.
 
 Use the explicit review-comment reply endpoint for inline AI review threads:
 

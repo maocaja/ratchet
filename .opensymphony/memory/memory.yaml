@@ -1,0 +1,107 @@
+code_intel:
+  enabled: true
+  ast:
+    enabled: true
+    max_file_bytes: 2097152
+    max_files_per_request: 200
+    max_matches_per_request: 2000
+    max_capture_bytes: 4096
+memory_root: .opensymphony/memory
+visibility: private
+index_path: .opensymphony/memory/memory.duckdb
+confidence_threshold: 75
+source_snapshots: hashes
+markdown_indexes: true
+docs:
+  public_root: docs
+  default_visibility: public
+  deny_private_links: true
+areas:
+  critica:
+    title: Crítica (stub — requiere análisis adversarial)
+    docs_target: docs/critica.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - Crítica (stub — requiere análisis adversarial)
+    source_refs:
+      docs:
+      - docs/critica.md
+  definicion:
+    title: Definición del proyecto (estrella polar) — semilla del PRD
+    docs_target: docs/definicion.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - Definición del proyecto (estrella polar) — semilla del PRD
+    source_refs:
+      docs:
+      - docs/definicion.md
+  harness-ficha:
+    title: Ficha de arnés y modelo — Ratchet
+    docs_target: docs/harness-ficha.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - Ficha de arnés y modelo — Ratchet
+    source_refs:
+      docs:
+      - docs/harness-ficha.md
+  icp:
+    title: ICP — Ideal Customer Profile
+    docs_target: docs/icp.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - ICP — Ideal Customer Profile
+    source_refs:
+      docs:
+      - docs/icp.md
+  mercado:
+    title: Mercado (stub — requiere research)
+    docs_target: docs/mercado.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - Mercado (stub — requiere research)
+    source_refs:
+      docs:
+      - docs/mercado.md
+  overview:
+    title: Overview
+    docs_target: docs/overview.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - Overview
+    source_refs:
+      docs:
+      - docs/overview.md
+  pvb:
+    title: Product Vision Board (PVB) — Ratchet
+    docs_target: docs/pvb.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - Product Vision Board (PVB) — Ratchet
+    source_refs:
+      docs:
+      - docs/pvb.md
+  validaciones-y-orquestacion:
+    title: Validaciones y orquestación — Ratchet
+    docs_target: docs/validaciones-y-orquestacion.md
+    visibility: public
+    status: stable
+    confidence: 85
+    aliases:
+    - Validaciones y orquestación — Ratchet
+    source_refs:
+      docs:
+      - docs/validaciones-y-orquestacion.md

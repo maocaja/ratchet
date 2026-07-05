@@ -42,3 +42,9 @@ eval-runs/
 .vscode/
 *.log
 !.env.example
+.opensymphony*
+!.opensymphony/
+.opensymphony/*
+!.opensymphony/memory/
+.opensymphony/memory/*
+!.opensymphony/memory/memory.yaml

@@ -58,4 +58,13 @@ Reportar siempre con salida real: si un test falla, mostrarlo; si un paso se sal
 - **`DESIGN.md`:** N/A — Ratchet MVP es API + CLI, **sin interfaz visual**.
 
 ## Estado actual
-CONSTRUCTION · U1 (Camino NIIF): **specs completas** (Functional · NFR · Infra, conformes al runbook AI-DLC). **Code Generation en pausa.** Al implementar, empezar por **CG-0** (scaffold + import-linter fail-closed) y el bucle test-alongside desde el núcleo determinista (`aidlc-docs/construction/plans/u1-camino-niif-code-generation-plan.md`). Carry-overs: CG-1 (retry solo reads) · CG-2 (test no-inyección LlmPort) · CG-3 (RAG stubbea generate()) · CG-4 (golden set sembrado desde repo).
+CONSTRUCTION · U1 (Camino NIIF): **specs completas** + implementación en curso. Hecho: CG-0 (scaffold + import-linter G2), TASK-002 (domain). Orden: núcleo determinista (evaluator → gate) → datos/loop → superficie. Plan por tarea en `docs/tasks/00X-*.md`. Carry-overs: CG-1 (retry solo reads) · CG-2 (test no-inyección LlmPort) · CG-3 (RAG stubbea generate()) · CG-4 (golden set sembrado desde repo).
+
+## Review guidelines
+Los reviews automatizados de PR (Codex code review — ver `Active review provider` en `WORKFLOW.md`) aplican esta sección + el detalle en `.agents/skills/custom-codereview-guide.md`. Criterios específicos de Ratchet a verificar:
+- **Regla de oro:** `recall` = código determinista; `faithfulness` = LLM-juez. **Nunca al revés.** Rechazar cualquier PR que decida el gate/monitor con un LLM.
+- **Guardrails:** **G1** data-ops capability-flagged · **G2** `gate/` y `orchestrator/` NO importan ni reciben el cliente LLM (import-linter + constructor sin `LlmPort`) · **G3** `investigator/` read-only, emite claim verificable, no aplica cambios.
+- **Anti-agentwashing:** ningún tipo/función finge lógica ausente; el gate es determinista, no un LLM disfrazado.
+- **Clave de estado:** dueño único = `aidlc-docs/construction/u1-camino-niif/nfr-design/nfr-design-patterns.md §P-1`. Un PR que re-deletree la tupla en otro archivo debe referenciarla, no duplicarla (ADR-005).
+- **Testing (`.claude/rules/testing.md`):** el `recall` se **recomputa** (nunca hardcode); factories, no datos mágicos; **regresiones inyectadas** en gate/localizador; PBT en el núcleo determinista.
+- **Verde obligatorio antes de aprobar:** `ruff check`, `lint-imports` (G2 KEPT), `pytest` (unit/PBT + e2e NIIF hermético). El e2e NIIF corre sin `ANTHROPIC_API_KEY`.
