@@ -38,14 +38,20 @@ class LexicalRetriever:
     def retrieve(self, query: str, k: int) -> list[Chunk]:
         if k <= 0:
             raise ValueError("k debe ser > 0")
-        scores = self.bm25.get_scores(_tokenize(query))
+        query_tokens = _tokenize(query)
+        query_token_set = set(query_tokens)
+        scores = self.bm25.get_scores(query_tokens)
         ranked = sorted(
             enumerate(scores),
-            key=lambda item: (-float(item[1]), self.documents[item[0]].doc_id),
+            key=lambda item: (
+                -float(item[1]),
+                -_overlap_count(query_token_set, self.tokenized_docs[item[0]]),
+                self.documents[item[0]].doc_id,
+            ),
         )
         chunks: list[Chunk] = []
-        for rank, (index, score) in enumerate(ranked[:k]):
-            if score <= 0:
+        for index, _score in ranked:
+            if _overlap_count(query_token_set, self.tokenized_docs[index]) == 0:
                 continue
             document = self.documents[index]
             chunks.append(
@@ -55,9 +61,11 @@ class LexicalRetriever:
                     start=0,
                     end=len(document.text),
                     text=document.text,
-                    rank=rank,
+                    rank=len(chunks),
                 )
             )
+            if len(chunks) == k:
+                break
         return chunks
 
 
@@ -72,14 +80,6 @@ class SampleRagPatient:
                 "NIIF 16 version vieja: la clasificacion historica distingue arrendamientos "
                 "operativos y financieros para el arrendatario. Este documento esta sembrado "
                 "como regresion para el camino NIIF."
-            ),
-        ),
-        Document(
-            doc_id="niif-16-vigente",
-            version="vigente",
-            text=(
-                "NIIF 16 vigente: el arrendatario reconoce un activo por derecho de uso y "
-                "un pasivo por arrendamiento para la mayoria de los contratos de arrendamiento."
             ),
         ),
         Document(
@@ -178,3 +178,7 @@ class SampleRagPatient:
 
 def _tokenize(text: str) -> list[str]:
     return [match.group(0).lower() for match in TOKEN_RE.finditer(text)]
+
+
+def _overlap_count(query_tokens: set[str], document_tokens: list[str]) -> int:
+    return len(query_tokens.intersection(document_tokens))

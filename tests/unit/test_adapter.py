@@ -21,7 +21,10 @@ def make_patch(doc_id: str = "niif-16-vieja", content: str | None = None) -> Pat
         patch_id=f"patch:{doc_id}",
         doc_id=doc_id,
         new_content=content
-        or "NIIF 16 vigente parcheada: reconoce activo por derecho de uso y pasivo.",
+        or (
+            "NIIF 16 vigente parcheada: reconoce activo por derecho de uso y pasivo "
+            "por arrendamiento."
+        ),
         rationale="actualizar fuente vieja",
         patch_hash=f"hash:{doc_id}",
     )
@@ -66,13 +69,24 @@ def test_corpus_fingerprint_devuelve_contenido_crudo_ordenado():
     )
 
 
+def test_corpus_base_excluye_niif16_vigente_hasta_parche():
+    rag = SampleRagPatient()
+
+    assert all(doc_id != "niif-16-vigente" for doc_id, _ in rag.corpus_fingerprint())
+    assert rag.retrieve("derecho pasivo arrendamiento", k=1) == []
+
+    rag.apply_data_patch(make_patch())
+
+    assert rag.retrieve("derecho pasivo arrendamiento", k=1)[0].doc_id == "niif-16-vieja"
+
+
 def test_apply_data_patch_y_revert_restauran_doc_e_indice():
     rag = SampleRagPatient()
     before_fingerprint = rag.corpus_fingerprint()
     before_retrieval = rag.retrieve("clasificacion historica operativos financieros", k=1)
 
     handle = rag.apply_data_patch(make_patch())
-    patched_retrieval = rag.retrieve("derecho de uso pasivo", k=1)
+    patched_retrieval = rag.retrieve("derecho pasivo arrendamiento", k=1)
     rag.revert_data_patch(handle)
 
     assert patched_retrieval[0].doc_id == "niif-16-vieja"
