@@ -143,7 +143,7 @@ def make_full_run_record(run_id: str = "run-full") -> RunRecord:
     """RunRecord completamente poblado (estructura anidada + datetime) para probar roundtrip."""
     return RunRecord(
         run_id=run_id,
-        state=RunState.PROMOVIDA,
+        state=RunState.GATE,
         seed=42,
         before=make_eval_result(recall=0.6),
         after=make_eval_result(recall=0.8),

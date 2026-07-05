@@ -90,12 +90,14 @@ TERMINAL_STATES: frozenset[RunState] = frozenset(
 
 
 class ReportDecision(StrEnum):
-    """Decisión en términos de resultado (≠ GateVerdict.decision)."""
+    """Decisión en términos de resultado (≠ GateVerdict.decision). Cubre las ramas de BL-9."""
 
     DEPLOY = "deploy"
     REVERT = "revert"
     PENDING = "pending"
     INCONCLUSA = "inconclusa"
+    SIN_CAMBIO = "sin-cambio"  # el monitor no disparó (BL-9)
+    DETENIDA = "detenida"  # paro humano deliberado, baseline intacto (US-13 reject, BR-62)
 
 
 class MonitorSource(StrEnum):

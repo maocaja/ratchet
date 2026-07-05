@@ -295,6 +295,15 @@ class ApprovalRequest(BaseModel):
     decided_by: str | None = None
     decided_at: datetime | None = None
 
+    @model_validator(mode="after")
+    def _decidido_tiene_autor(self) -> ApprovalRequest:
+        # Integridad de auditoría: una decisión (≠ pending) exige quién y cuándo la tomó.
+        if self.decision is not ApprovalDecision.PENDING and (
+            self.decided_by is None or self.decided_at is None
+        ):
+            raise ValueError("una aprobación decidida requiere decided_by y decided_at")
+        return self
+
 
 class Operator(BaseModel):
     """Actor humano (Andrés/Carolina)."""
