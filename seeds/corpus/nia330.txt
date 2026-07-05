@@ -1,0 +1,26 @@
+# NIA330 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia330-respuestas
+
+La NIA 330 exige que el auditor diseñe e implemente respuestas globales para responder a los riesgos valorados de incorrección material en los estados financieros.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia330-sustantivos
+
+La NIA 330 requiere que el auditor diseñe y ejecute procedimientos sustantivos para cada tipo de transacción, saldo contable y revelación que sea material.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia330-controles
+
+El auditor prueba la eficacia operativa de los controles cuando su valoración del riesgo espera que los controles operen con eficacia o cuando los procedimientos sustantivos no bastan.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia330-suficiencia
+
+La NIA 330 exige que el auditor evalúe si la evidencia de auditoría obtenida es suficiente y adecuada para reducir el riesgo de auditoría a un nivel aceptablemente bajo.

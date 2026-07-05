@@ -1,8 +1,6 @@
-[EJEMPLO — VERSIÓN VIEJA/DEROGADA de NIIF 16]
+# NIIF16 — VERSIÓN VIEJA / DEROGADA (documento de muestra, DEMO)
 
-Este archivo representa el estado INICIAL del corpus: la versión antigua del
-documento NIIF 16 que el RAG está citando (la "fuente-vieja"). Reemplázalo con
-el texto real de la versión derogada.
-
-Cuando Ratchet detecte la caída de recall y localice "fuente-vieja", el parche
-reemplazará este archivo por el de seeds/corpus_vigente/niif16.txt.
+Esta es la versión antigua de la norma de arrendamientos que el corpus está citando.
+El modelo de arrendamiento operativo bajo la norma derogada NIC 17 no reconocía un activo
+por derecho de uso ni un pasivo por arrendamiento en el estado de situación financiera.
+Ninguna de las afirmaciones vigentes de la NIIF 16 aparece aquí → dispara 'fuente-vieja'.

@@ -1,6 +1,50 @@
-[EJEMPLO — VERSIÓN VIGENTE de NIIF 16]
+# NIIF16 — documento de muestra (sintético, DEMO)
 
-Este archivo representa la versión CORRECTA/vigente de NIIF 16 — a la que apuntan
-los gold_span del golden set. Reemplázalo con el texto real vigente.
 
-El parche de datos (rama de U1) reemplaza seeds/corpus/niif16.txt por este.
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-plazo
+
+El plazo del arrendamiento comprende el periodo no cancelable más los periodos cubiertos por una opción de renovación que el arrendatario tenga certeza razonable de ejercer.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-activo
+
+Al comienzo del arrendamiento el arrendatario reconoce un activo por derecho de uso y un pasivo por arrendamiento medido al valor presente de los pagos.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-medicion
+
+El pasivo por arrendamiento se mide inicialmente al valor presente de los pagos por arrendamiento descontados usando la tasa de interés implícita.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-exencion
+
+La NIIF 16 permite exenciones de reconocimiento para arrendamientos de corto plazo y para activos de bajo valor, cuyos pagos se reconocen como gasto lineal.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-corto-plazo
+
+Un arrendamiento de corto plazo es aquel cuyo plazo del arrendamiento es de doce meses o menos y que no contiene una opción de compra.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-depreciacion
+
+El activo por derecho de uso se deprecia de forma sistemática a lo largo de la vida útil del activo o del plazo del arrendamiento, el menor de ambos.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-tasa
+
+Cuando la tasa de interés implícita no puede determinarse con facilidad, el arrendatario utiliza su tasa incremental de endeudamiento para descontar los pagos.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif16-remedicion
+
+El arrendatario vuelve a medir el pasivo por arrendamiento cuando cambian los pagos futuros por una modificación del plazo o de la estimación de una opción de compra.

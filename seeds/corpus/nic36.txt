@@ -1,0 +1,26 @@
+# NIC36 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic36-indicios
+
+La NIC 36 exige evaluar en cada cierre si existen indicios de deterioro y, de existir, estimar el importe recuperable del activo.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic36-recuperable
+
+El importe recuperable es el mayor entre el valor razonable menos los costos de disposición y el valor en uso del activo o de la unidad generadora de efectivo.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic36-uge
+
+Una unidad generadora de efectivo es el grupo identificable más pequeño de activos que genera entradas de efectivo independientes de otros activos.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic36-reversion
+
+La pérdida por deterioro se revierte cuando cambian las estimaciones usadas para determinar el importe recuperable, salvo para la plusvalía que nunca se revierte.

@@ -1,3 +1,32 @@
-[EJEMPLO — documento NIA 315]
+# NIA315 — documento de muestra (sintético, DEMO)
 
-Documento de muestra (no se parcha en el escenario). Reemplázalo con texto real.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia315-riesgo-inherente
+
+El riesgo inherente es la susceptibilidad de una afirmación a una incorrección que pudiera ser material, antes de considerar los controles relacionados.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia315-comprension
+
+La NIA 315 exige que el auditor obtenga una comprensión de la entidad y su entorno, incluido su control interno, para identificar y valorar los riesgos de incorrección material.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia315-controles
+
+La NIA 315 considera componentes del control interno como el entorno de control, el proceso de valoración de riesgos, las actividades de control y el seguimiento.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia315-significativo
+
+Un riesgo significativo es un riesgo identificado y valorado de incorrección material que, a juicio del auditor, requiere una consideración especial de auditoría.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nia315-procedimientos
+
+El auditor aplica procedimientos de valoración del riesgo que incluyen indagaciones, procedimientos analíticos y observación e inspección para sustentar su comprensión.

@@ -1,0 +1,26 @@
+# NIIF13 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif13-definicion
+
+La NIIF 13 define el valor razonable como el precio que se recibiría por vender un activo o se pagaría por transferir un pasivo en una transacción ordenada entre participantes del mercado.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif13-jerarquia
+
+La jerarquía del valor razonable de la NIIF 13 tiene tres niveles según las variables usadas: precios cotizados, datos observables y datos no observables.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif13-mercado
+
+La medición del valor razonable supone que la transacción ocurre en el mercado principal del activo o pasivo o, en su ausencia, en el mercado más ventajoso.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif13-tecnicas
+
+La NIIF 13 reconoce técnicas de valoración de enfoque de mercado, de costo y de ingreso, que deben maximizar el uso de variables observables.

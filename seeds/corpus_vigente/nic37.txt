@@ -1,0 +1,26 @@
+# NIC37 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic37-provision
+
+La NIC 37 exige reconocer una provisión cuando existe una obligación presente resultado de un suceso pasado, es probable una salida de recursos y puede estimarse con fiabilidad.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic37-contingente
+
+Un pasivo contingente es una obligación posible surgida de sucesos pasados cuya existencia se confirmará por eventos futuros inciertos no enteramente bajo control de la entidad.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic37-onerosos
+
+La NIC 37 exige reconocer y medir como provisión la obligación presente derivada de un contrato oneroso cuyos costos inevitables superan los beneficios esperados.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic37-reembolso
+
+Cuando se espera un reembolso de un tercero, la NIC 37 lo reconoce como un activo separado solo si es prácticamente seguro que se recibirá al liquidar la obligación.

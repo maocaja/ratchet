@@ -1,0 +1,38 @@
+# NIIF9 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif9-clasificacion
+
+La NIIF 9 clasifica los activos financieros según el modelo de negocio de la entidad y las características de los flujos de efectivo contractuales del instrumento.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif9-deterioro
+
+La NIIF 9 introduce un modelo de pérdidas crediticias esperadas que exige reconocer el deterioro antes de que ocurra un evento de incumplimiento.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif9-costo-amortizado
+
+Un activo financiero se mide al costo amortizado cuando se mantiene para cobrar flujos contractuales que son únicamente pagos de principal e intereses.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif9-cobertura
+
+La contabilidad de coberturas de la NIIF 9 reconoce una relación económica entre el instrumento de cobertura y la partida cubierta que compensa cambios de valor.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif9-baja
+
+Un activo financiero se da de baja cuando expiran los derechos contractuales sobre los flujos de efectivo o cuando se transfieren sustancialmente los riesgos y beneficios.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif9-valor-razonable
+
+Se miden a valor razonable con cambios en resultados los activos financieros mantenidos para negociar y aquellos que no cumplen el criterio de flujos contractuales.

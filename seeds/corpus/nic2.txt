@@ -1,0 +1,26 @@
+# NIC2 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic2-medicion
+
+La NIC 2 exige medir los inventarios al menor entre el costo y el valor neto realizable.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic2-costo
+
+El costo de los inventarios comprende los costos de adquisición, los costos de transformación y otros costos incurridos para darles su condición y ubicación actuales.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic2-formulas
+
+La NIC 2 permite las fórmulas de costo de identificación específica, primeras entradas primeras salidas y costo promedio ponderado.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## nic2-vnr
+
+El valor neto realizable es el precio estimado de venta en el curso normal de la operación menos los costos estimados de terminación y de venta.

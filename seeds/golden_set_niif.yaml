@@ -1,40 +1,587 @@
-# Golden Set — Camino NIIF (U1) · TASK-000 / RAT-5
-#
-# ⚠️ LA VERDAD LA DEFINES TÚ (BR-76). Los ítems de abajo son EJEMPLOS ilustrativos
-#    con contenido placeholder — reemplázalos/expándelos con NIIF real y valida los offsets.
-#
-# Requisitos (acceptance RAT-5):
-#   - ≥50 ítems (aquí van 2 de ejemplo; faltan ≥48)
-#   - cada gold_span: offsets de carácter REALES sobre seeds/corpus/<doc_id>.txt, con text exacto
-#   - ≥1 ítem critical: true   ·   ≥1 ítem ligado a NIIF 16
-#   - Guía léxica (BM25): la pregunta comparte vocabulario con gold_span.text
-#
-# Valida con:  python scripts/validate_golden_set.py
+# Golden Set — Camino NIIF (U1) · RAT-5 · DATOS DE MUESTRA SINTÉTICOS (revisar — BR-76)
+# Generado por scripts/gen_golden_set.py (offsets exactos por construcción).
+# NO son normas reales auditadas; sirven para demostrar el loop de Ratchet.
 
 version: 1
 items:
-  # ── EJEMPLO 1 (crítico, ligado a NIIF 16 — el del escenario) ──────────────
-  - item_id: niif16-plazo-arrendamiento
-    question: "¿Cómo se determina el plazo del arrendamiento según la NIIF 16?"   # comparte vocabulario con el span
-    answer: "[EJEMPLO — respuesta de referencia humana; reemplazar]"
-    gold_span:
-      doc_id: niif16                 # → seeds/corpus/niif16.txt
-      start: 0                       # ⚠️ offset REAL a validar contra el texto
-      end: 0
-      text: "[EJEMPLO — copiar el texto dorado EXACTO del corpus vigente]"
-    critical: true
-    slice: niif16
-
-  # ── EJEMPLO 2 (no crítico, otra rebanada) ────────────────────────────────
-  - item_id: nia315-riesgo-inherente
-    question: "¿Qué es el riesgo inherente según la NIA 315?"
-    answer: "[EJEMPLO — reemplazar]"
-    gold_span:
-      doc_id: nia315                 # → seeds/corpus/nia315.txt
-      start: 0
-      end: 0
-      text: "[EJEMPLO — texto dorado exacto]"
-    critical: false
-    slice: nia
-
-  # ── … faltan ≥48 ítems más (curación humana) ─────────────────────────────
+- item_id: niif16-plazo
+  question: ¿Cómo se determina el plazo del arrendamiento según la NIIF 16?
+  answer: El periodo no cancelable más las renovaciones con certeza razonable de ejercicio.
+  gold_span:
+    doc_id: niif16
+    start: 242
+    end: 415
+    text: El plazo del arrendamiento comprende el periodo no cancelable más los periodos
+      cubiertos por una opción de renovación que el arrendatario tenga certeza razonable
+      de ejercer.
+  critical: true
+  slice: niif16
+- item_id: niif16-activo
+  question: ¿Qué reconoce el arrendatario al inicio del arrendamiento bajo NIIF 16?
+  answer: Un activo por derecho de uso y un pasivo por arrendamiento.
+  gold_span:
+    doc_id: niif16
+    start: 608
+    end: 760
+    text: Al comienzo del arrendamiento el arrendatario reconoce un activo por derecho
+      de uso y un pasivo por arrendamiento medido al valor presente de los pagos.
+  critical: true
+  slice: niif16
+- item_id: niif16-medicion
+  question: ¿Cómo se mide inicialmente el pasivo por arrendamiento en la NIIF 16?
+  answer: Al valor presente de los pagos descontados a la tasa implícita.
+  gold_span:
+    doc_id: niif16
+    start: 955
+    end: 1101
+    text: El pasivo por arrendamiento se mide inicialmente al valor presente de los
+      pagos por arrendamiento descontados usando la tasa de interés implícita.
+  critical: false
+  slice: niif16
+- item_id: niif16-exencion
+  question: ¿Qué exenciones de reconocimiento permite la NIIF 16 al arrendatario?
+  answer: Arrendamientos de corto plazo y activos de bajo valor.
+  gold_span:
+    doc_id: niif16
+    start: 1296
+    end: 1452
+    text: La NIIF 16 permite exenciones de reconocimiento para arrendamientos de corto
+      plazo y para activos de bajo valor, cuyos pagos se reconocen como gasto lineal.
+  critical: false
+  slice: niif16
+- item_id: niif16-corto-plazo
+  question: ¿Qué es un arrendamiento de corto plazo según la NIIF 16?
+  answer: Aquel de doce meses o menos, sin opción de compra.
+  gold_span:
+    doc_id: niif16
+    start: 1650
+    end: 1784
+    text: Un arrendamiento de corto plazo es aquel cuyo plazo del arrendamiento es
+      de doce meses o menos y que no contiene una opción de compra.
+  critical: false
+  slice: niif16
+- item_id: niif16-depreciacion
+  question: ¿Cómo se deprecia el activo por derecho de uso en la NIIF 16?
+  answer: Sistemáticamente por el menor entre vida útil y plazo.
+  gold_span:
+    doc_id: niif16
+    start: 1983
+    end: 2132
+    text: El activo por derecho de uso se deprecia de forma sistemática a lo largo
+      de la vida útil del activo o del plazo del arrendamiento, el menor de ambos.
+  critical: false
+  slice: niif16
+- item_id: niif16-tasa
+  question: ¿Qué tasa de descuento usa el arrendatario cuando no puede determinar
+    la tasa implícita?
+  answer: Su tasa incremental de endeudamiento.
+  gold_span:
+    doc_id: niif16
+    start: 2323
+    end: 2482
+    text: Cuando la tasa de interés implícita no puede determinarse con facilidad,
+      el arrendatario utiliza su tasa incremental de endeudamiento para descontar
+      los pagos.
+  critical: true
+  slice: niif16
+- item_id: niif16-remedicion
+  question: ¿Cuándo se vuelve a medir el pasivo por arrendamiento bajo NIIF 16?
+  answer: Cuando cambian los pagos por modificación del plazo o de la opción.
+  gold_span:
+    doc_id: niif16
+    start: 2679
+    end: 2845
+    text: El arrendatario vuelve a medir el pasivo por arrendamiento cuando cambian
+      los pagos futuros por una modificación del plazo o de la estimación de una opción
+      de compra.
+  critical: false
+  slice: niif16
+- item_id: niif15-modelo
+  question: ¿Cuál es el modelo de cinco pasos para reconocer ingresos en la NIIF 15?
+  answer: Los cinco pasos del modelo de reconocimiento de ingresos.
+  gold_span:
+    doc_id: niif15
+    start: 243
+    end: 458
+    text: 'La NIIF 15 aplica un modelo de cinco pasos: identificar el contrato, identificar
+      las obligaciones de desempeño, determinar el precio de la transacción, asignarlo
+      y reconocer el ingreso al satisfacer cada obligación.'
+  critical: true
+  slice: niif15
+- item_id: niif15-obligacion
+  question: ¿Qué es una obligación de desempeño en la NIIF 15?
+  answer: El compromiso de transferir un bien o servicio distinto.
+  gold_span:
+    doc_id: niif15
+    start: 655
+    end: 814
+    text: Una obligación de desempeño es un compromiso en el contrato de transferir
+      al cliente un bien o servicio distinto o una serie de bienes sustancialmente
+      iguales.
+  critical: false
+  slice: niif15
+- item_id: niif15-precio
+  question: ¿Cómo se determina el precio de la transacción en la NIIF 15?
+  answer: La contraprestación esperada por transferir los bienes o servicios.
+  gold_span:
+    doc_id: niif15
+    start: 1007
+    end: 1177
+    text: El precio de la transacción es el importe de la contraprestación que la
+      entidad espera recibir a cambio de transferir los bienes o servicios comprometidos
+      con el cliente.
+  critical: false
+  slice: niif15
+- item_id: niif15-momento
+  question: ¿Cuándo reconoce ingresos una entidad bajo la NIIF 15?
+  answer: Cuando transfiere el control, en un momento o a lo largo del tiempo.
+  gold_span:
+    doc_id: niif15
+    start: 1371
+    end: 1542
+    text: La entidad reconoce el ingreso cuando satisface una obligación de desempeño
+      transfiriendo el control del bien o servicio al cliente, en un momento o a lo
+      largo del tiempo.
+  critical: true
+  slice: niif15
+- item_id: niif15-variable
+  question: ¿Cómo se trata la contraprestación variable en la NIIF 15?
+  answer: Se estima con valor esperado o importe más probable, con límite de reversión.
+  gold_span:
+    doc_id: niif15
+    start: 1737
+    end: 1911
+    text: La contraprestación variable se estima usando el valor esperado o el importe
+      más probable, limitada para que sea altamente probable que no ocurra una reversión
+      significativa.
+  critical: false
+  slice: niif15
+- item_id: niif15-costos
+  question: ¿Qué costos incrementales del contrato se capitalizan en la NIIF 15?
+  answer: Los costos incrementales recuperables de obtener el contrato.
+  gold_span:
+    doc_id: niif15
+    start: 2104
+    end: 2252
+    text: Los costos incrementales de obtener un contrato se reconocen como activo
+      si la entidad espera recuperarlos a lo largo de la relación con el cliente.
+  critical: false
+  slice: niif15
+- item_id: niif15-garantia
+  question: ¿Cómo se contabiliza una garantía como obligación de desempeño en la NIIF
+    15?
+  answer: Como obligación de desempeño distinta si es contratable por separado.
+  gold_span:
+    doc_id: niif15
+    start: 2447
+    end: 2614
+    text: Cuando el cliente puede contratar la garantía por separado, esta constituye
+      una obligación de desempeño distinta a la que se asigna parte del precio de
+      la transacción.
+  critical: false
+  slice: niif15
+- item_id: niif9-clasificacion
+  question: ¿Cómo se clasifican los activos financieros según la NIIF 9?
+  answer: Por el modelo de negocio y las características de los flujos contractuales.
+  gold_span:
+    doc_id: niif9
+    start: 248
+    end: 411
+    text: La NIIF 9 clasifica los activos financieros según el modelo de negocio de
+      la entidad y las características de los flujos de efectivo contractuales del
+      instrumento.
+  critical: true
+  slice: niif9
+- item_id: niif9-deterioro
+  question: ¿Qué modelo de deterioro introduce la NIIF 9?
+  answer: El modelo de pérdidas crediticias esperadas.
+  gold_span:
+    doc_id: niif9
+    start: 606
+    end: 751
+    text: La NIIF 9 introduce un modelo de pérdidas crediticias esperadas que exige
+      reconocer el deterioro antes de que ocurra un evento de incumplimiento.
+  critical: true
+  slice: niif9
+- item_id: niif9-costo-amortizado
+  question: ¿Cuándo se mide un activo financiero al costo amortizado en la NIIF 9?
+  answer: Cuando se mantiene para cobrar principal e intereses.
+  gold_span:
+    doc_id: niif9
+    start: 953
+    end: 1104
+    text: Un activo financiero se mide al costo amortizado cuando se mantiene para
+      cobrar flujos contractuales que son únicamente pagos de principal e intereses.
+  critical: false
+  slice: niif9
+- item_id: niif9-cobertura
+  question: ¿Qué relación de cobertura reconoce la contabilidad de coberturas de la
+    NIIF 9?
+  answer: Una relación económica de compensación entre instrumento y partida cubierta.
+  gold_span:
+    doc_id: niif9
+    start: 1299
+    end: 1460
+    text: La contabilidad de coberturas de la NIIF 9 reconoce una relación económica
+      entre el instrumento de cobertura y la partida cubierta que compensa cambios
+      de valor.
+  critical: false
+  slice: niif9
+- item_id: niif9-baja
+  question: ¿Cuándo se da de baja un activo financiero según la NIIF 9?
+  answer: Cuando expiran los derechos o se transfieren riesgos y beneficios.
+  gold_span:
+    doc_id: niif9
+    start: 1650
+    end: 1821
+    text: Un activo financiero se da de baja cuando expiran los derechos contractuales
+      sobre los flujos de efectivo o cuando se transfieren sustancialmente los riesgos
+      y beneficios.
+  critical: false
+  slice: niif9
+- item_id: niif9-valor-razonable
+  question: ¿Qué activos se miden a valor razonable con cambios en resultados en la
+    NIIF 9?
+  answer: Los mantenidos para negociar y los que no cumplen el criterio de flujos.
+  gold_span:
+    doc_id: niif9
+    start: 2022
+    end: 2186
+    text: Se miden a valor razonable con cambios en resultados los activos financieros
+      mantenidos para negociar y aquellos que no cumplen el criterio de flujos contractuales.
+  critical: false
+  slice: niif9
+- item_id: niif13-definicion
+  question: ¿Cómo define la NIIF 13 el valor razonable?
+  answer: El precio de venta o transferencia en una transacción ordenada de mercado.
+  gold_span:
+    doc_id: niif13
+    start: 247
+    end: 435
+    text: La NIIF 13 define el valor razonable como el precio que se recibiría por
+      vender un activo o se pagaría por transferir un pasivo en una transacción ordenada
+      entre participantes del mercado.
+  critical: false
+  slice: niif13
+- item_id: niif13-jerarquia
+  question: ¿Qué niveles tiene la jerarquía del valor razonable en la NIIF 13?
+  answer: 'Tres niveles: precios cotizados, datos observables y no observables.'
+  gold_span:
+    doc_id: niif13
+    start: 631
+    end: 785
+    text: 'La jerarquía del valor razonable de la NIIF 13 tiene tres niveles según
+      las variables usadas: precios cotizados, datos observables y datos no observables.'
+  critical: true
+  slice: niif13
+- item_id: niif13-mercado
+  question: ¿Qué mercado usa la NIIF 13 para medir el valor razonable?
+  answer: El mercado principal o, en su ausencia, el más ventajoso.
+  gold_span:
+    doc_id: niif13
+    start: 979
+    end: 1135
+    text: La medición del valor razonable supone que la transacción ocurre en el mercado
+      principal del activo o pasivo o, en su ausencia, en el mercado más ventajoso.
+  critical: false
+  slice: niif13
+- item_id: niif13-tecnicas
+  question: ¿Qué técnicas de valoración reconoce la NIIF 13?
+  answer: Enfoques de mercado, costo e ingreso, maximizando variables observables.
+  gold_span:
+    doc_id: niif13
+    start: 1330
+    end: 1471
+    text: La NIIF 13 reconoce técnicas de valoración de enfoque de mercado, de costo
+      y de ingreso, que deben maximizar el uso de variables observables.
+  critical: false
+  slice: niif13
+- item_id: nia315-riesgo-inherente
+  question: ¿Qué es el riesgo inherente según la NIA 315?
+  answer: La susceptibilidad de una afirmación a incorrección material antes de controles.
+  gold_span:
+    doc_id: nia315
+    start: 253
+    end: 405
+    text: El riesgo inherente es la susceptibilidad de una afirmación a una incorrección
+      que pudiera ser material, antes de considerar los controles relacionados.
+  critical: false
+  slice: nia
+- item_id: nia315-comprension
+  question: ¿Qué debe comprender el auditor según la NIA 315?
+  answer: La entidad, su entorno y su control interno para valorar los riesgos.
+  gold_span:
+    doc_id: nia315
+    start: 603
+    end: 780
+    text: La NIA 315 exige que el auditor obtenga una comprensión de la entidad y
+      su entorno, incluido su control interno, para identificar y valorar los riesgos
+      de incorrección material.
+  critical: true
+  slice: nia
+- item_id: nia315-controles
+  question: ¿Qué componentes del control interno considera la NIA 315?
+  answer: Entorno de control, valoración de riesgos, actividades de control y seguimiento.
+  gold_span:
+    doc_id: nia315
+    start: 976
+    end: 1138
+    text: La NIA 315 considera componentes del control interno como el entorno de
+      control, el proceso de valoración de riesgos, las actividades de control y el
+      seguimiento.
+  critical: false
+  slice: nia
+- item_id: nia315-significativo
+  question: ¿Qué es un riesgo significativo en la NIA 315?
+  answer: Un riesgo valorado que requiere consideración especial de auditoría.
+  gold_span:
+    doc_id: nia315
+    start: 1338
+    end: 1500
+    text: Un riesgo significativo es un riesgo identificado y valorado de incorrección
+      material que, a juicio del auditor, requiere una consideración especial de auditoría.
+  critical: true
+  slice: nia
+- item_id: nia315-procedimientos
+  question: ¿Qué procedimientos de valoración del riesgo aplica el auditor en la NIA
+    315?
+  answer: Indagaciones, procedimientos analíticos y observación e inspección.
+  gold_span:
+    doc_id: nia315
+    start: 1701
+    end: 1869
+    text: El auditor aplica procedimientos de valoración del riesgo que incluyen indagaciones,
+      procedimientos analíticos y observación e inspección para sustentar su comprensión.
+  critical: false
+  slice: nia
+- item_id: nia330-respuestas
+  question: ¿Qué respuestas globales exige la NIA 330 frente a los riesgos valorados?
+  answer: Diseñar respuestas globales a los riesgos valorados en los estados financieros.
+  gold_span:
+    doc_id: nia330
+    start: 247
+    end: 410
+    text: La NIA 330 exige que el auditor diseñe e implemente respuestas globales
+      para responder a los riesgos valorados de incorrección material en los estados
+      financieros.
+  critical: true
+  slice: nia
+- item_id: nia330-sustantivos
+  question: ¿Qué procedimientos sustantivos requiere la NIA 330?
+  answer: Procedimientos sustantivos para cada transacción, saldo y revelación material.
+  gold_span:
+    doc_id: nia330
+    start: 608
+    end: 763
+    text: La NIA 330 requiere que el auditor diseñe y ejecute procedimientos sustantivos
+      para cada tipo de transacción, saldo contable y revelación que sea material.
+  critical: false
+  slice: nia
+- item_id: nia330-controles
+  question: ¿Cuándo prueba el auditor la eficacia operativa de los controles según
+    la NIA 330?
+  answer: Cuando espera que los controles operen con eficacia o lo sustantivo no basta.
+  gold_span:
+    doc_id: nia330
+    start: 959
+    end: 1143
+    text: El auditor prueba la eficacia operativa de los controles cuando su valoración
+      del riesgo espera que los controles operen con eficacia o cuando los procedimientos
+      sustantivos no bastan.
+  critical: false
+  slice: nia
+- item_id: nia330-suficiencia
+  question: ¿Qué evalúa el auditor sobre la evidencia según la NIA 330?
+  answer: Si la evidencia es suficiente y adecuada para reducir el riesgo de auditoría.
+  gold_span:
+    doc_id: nia330
+    start: 1341
+    end: 1510
+    text: La NIA 330 exige que el auditor evalúe si la evidencia de auditoría obtenida
+      es suficiente y adecuada para reducir el riesgo de auditoría a un nivel aceptablemente
+      bajo.
+  critical: true
+  slice: nia
+- item_id: niif7-riesgos
+  question: ¿Qué riesgos exige revelar la NIIF 7 sobre instrumentos financieros?
+  answer: Riesgos de crédito, de liquidez y de mercado.
+  gold_span:
+    doc_id: niif7
+    start: 242
+    end: 388
+    text: La NIIF 7 exige revelar la naturaleza y el alcance de los riesgos de crédito,
+      de liquidez y de mercado que surgen de los instrumentos financieros.
+  critical: false
+  slice: niif7
+- item_id: niif7-liquidez
+  question: ¿Qué revela una entidad sobre el riesgo de liquidez según la NIIF 7?
+  answer: Un análisis de vencimientos de los pasivos financieros.
+  gold_span:
+    doc_id: niif7
+    start: 582
+    end: 737
+    text: Sobre el riesgo de liquidez la NIIF 7 exige revelar un análisis de vencimientos
+      de los pasivos financieros que muestre los flujos contractuales remanentes.
+  critical: false
+  slice: niif7
+- item_id: niif7-credito
+  question: ¿Qué información sobre riesgo de crédito exige la NIIF 7?
+  answer: Exposición máxima, garantías y calidad crediticia.
+  gold_span:
+    doc_id: niif7
+    start: 930
+    end: 1088
+    text: La NIIF 7 exige revelar información sobre la exposición máxima al riesgo
+      de crédito, las garantías tomadas y la calidad crediticia de los activos financieros.
+  critical: true
+  slice: niif7
+- item_id: niif7-mercado
+  question: ¿Qué análisis de sensibilidad requiere la NIIF 7 para el riesgo de mercado?
+  answer: Un análisis de sensibilidad ante cambios razonables en variables de mercado.
+  gold_span:
+    doc_id: niif7
+    start: 1281
+    end: 1458
+    text: La NIIF 7 requiere un análisis de sensibilidad que muestre cómo el resultado
+      y el patrimonio se verían afectados por cambios razonablemente posibles en las
+      variables de mercado.
+  critical: false
+  slice: niif7
+- item_id: nic36-indicios
+  question: ¿Cuándo evalúa una entidad el deterioro de un activo según la NIC 36?
+  answer: En cada cierre, si hay indicios, estimando el importe recuperable.
+  gold_span:
+    doc_id: nic36
+    start: 243
+    end: 372
+    text: La NIC 36 exige evaluar en cada cierre si existen indicios de deterioro
+      y, de existir, estimar el importe recuperable del activo.
+  critical: false
+  slice: nic
+- item_id: nic36-recuperable
+  question: ¿Cómo se determina el importe recuperable en la NIC 36?
+  answer: El mayor entre valor razonable menos costos y valor en uso.
+  gold_span:
+    doc_id: nic36
+    start: 569
+    end: 728
+    text: El importe recuperable es el mayor entre el valor razonable menos los costos
+      de disposición y el valor en uso del activo o de la unidad generadora de efectivo.
+  critical: true
+  slice: nic
+- item_id: nic36-uge
+  question: ¿Qué es una unidad generadora de efectivo en la NIC 36?
+  answer: El grupo más pequeño de activos que genera efectivo independiente.
+  gold_span:
+    doc_id: nic36
+    start: 917
+    end: 1064
+    text: Una unidad generadora de efectivo es el grupo identificable más pequeño
+      de activos que genera entradas de efectivo independientes de otros activos.
+  critical: false
+  slice: nic
+- item_id: nic36-reversion
+  question: ¿Cuándo se revierte una pérdida por deterioro según la NIC 36?
+  answer: Cuando cambian las estimaciones, salvo la plusvalía.
+  gold_span:
+    doc_id: nic36
+    start: 1259
+    end: 1421
+    text: La pérdida por deterioro se revierte cuando cambian las estimaciones usadas
+      para determinar el importe recuperable, salvo para la plusvalía que nunca se
+      revierte.
+  critical: false
+  slice: nic
+- item_id: nic37-provision
+  question: ¿Cuándo se reconoce una provisión según la NIC 37?
+  answer: Obligación presente por suceso pasado, salida probable y estimación fiable.
+  gold_span:
+    doc_id: nic37
+    start: 244
+    end: 421
+    text: La NIC 37 exige reconocer una provisión cuando existe una obligación presente
+      resultado de un suceso pasado, es probable una salida de recursos y puede estimarse
+      con fiabilidad.
+  critical: true
+  slice: nic
+- item_id: nic37-contingente
+  question: ¿Qué es un pasivo contingente en la NIC 37?
+  answer: Una obligación posible confirmada por eventos futuros inciertos.
+  gold_span:
+    doc_id: nic37
+    start: 618
+    end: 795
+    text: Un pasivo contingente es una obligación posible surgida de sucesos pasados
+      cuya existencia se confirmará por eventos futuros inciertos no enteramente bajo
+      control de la entidad.
+  critical: false
+  slice: nic
+- item_id: nic37-onerosos
+  question: ¿Cómo trata la NIC 37 los contratos de carácter oneroso?
+  answer: Se provisiona la obligación del contrato oneroso.
+  gold_span:
+    doc_id: nic37
+    start: 989
+    end: 1151
+    text: La NIC 37 exige reconocer y medir como provisión la obligación presente
+      derivada de un contrato oneroso cuyos costos inevitables superan los beneficios
+      esperados.
+  critical: false
+  slice: nic
+- item_id: nic37-reembolso
+  question: ¿Cómo se reconoce un reembolso esperado de una provisión en la NIC 37?
+  answer: Como activo separado solo si es prácticamente seguro.
+  gold_span:
+    doc_id: nic37
+    start: 1346
+    end: 1511
+    text: Cuando se espera un reembolso de un tercero, la NIC 37 lo reconoce como
+      un activo separado solo si es prácticamente seguro que se recibirá al liquidar
+      la obligación.
+  critical: false
+  slice: nic
+- item_id: nic2-medicion
+  question: ¿Cómo se miden los inventarios según la NIC 2?
+  answer: Al menor entre costo y valor neto realizable.
+  gold_span:
+    doc_id: nic2
+    start: 241
+    end: 329
+    text: La NIC 2 exige medir los inventarios al menor entre el costo y el valor
+      neto realizable.
+  critical: false
+  slice: nic
+- item_id: nic2-costo
+  question: ¿Qué incluye el costo de los inventarios en la NIC 2?
+  answer: Adquisición, transformación y otros costos para su condición actual.
+  gold_span:
+    doc_id: nic2
+    start: 519
+    end: 685
+    text: El costo de los inventarios comprende los costos de adquisición, los costos
+      de transformación y otros costos incurridos para darles su condición y ubicación
+      actuales.
+  critical: false
+  slice: nic
+- item_id: nic2-formulas
+  question: ¿Qué fórmulas de costo permite la NIC 2?
+  answer: Identificación específica, PEPS y promedio ponderado.
+  gold_span:
+    doc_id: nic2
+    start: 878
+    end: 1009
+    text: La NIC 2 permite las fórmulas de costo de identificación específica, primeras
+      entradas primeras salidas y costo promedio ponderado.
+  critical: false
+  slice: nic
+- item_id: nic2-vnr
+  question: ¿Qué es el valor neto realizable en la NIC 2?
+  answer: Precio de venta estimado menos costos de terminación y venta.
+  gold_span:
+    doc_id: nic2
+    start: 1197
+    end: 1341
+    text: El valor neto realizable es el precio estimado de venta en el curso normal
+      de la operación menos los costos estimados de terminación y de venta.
+  critical: true
+  slice: nic

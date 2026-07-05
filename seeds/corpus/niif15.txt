@@ -1,0 +1,44 @@
+# NIIF15 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif15-modelo
+
+La NIIF 15 aplica un modelo de cinco pasos: identificar el contrato, identificar las obligaciones de desempeño, determinar el precio de la transacción, asignarlo y reconocer el ingreso al satisfacer cada obligación.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif15-obligacion
+
+Una obligación de desempeño es un compromiso en el contrato de transferir al cliente un bien o servicio distinto o una serie de bienes sustancialmente iguales.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif15-precio
+
+El precio de la transacción es el importe de la contraprestación que la entidad espera recibir a cambio de transferir los bienes o servicios comprometidos con el cliente.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif15-momento
+
+La entidad reconoce el ingreso cuando satisface una obligación de desempeño transfiriendo el control del bien o servicio al cliente, en un momento o a lo largo del tiempo.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif15-variable
+
+La contraprestación variable se estima usando el valor esperado o el importe más probable, limitada para que sea altamente probable que no ocurra una reversión significativa.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif15-costos
+
+Los costos incrementales de obtener un contrato se reconocen como activo si la entidad espera recuperarlos a lo largo de la relación con el cliente.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif15-garantia
+
+Cuando el cliente puede contratar la garantía por separado, esta constituye una obligación de desempeño distinta a la que se asigna parte del precio de la transacción.

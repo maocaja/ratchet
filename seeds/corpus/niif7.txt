@@ -1,0 +1,26 @@
+# NIIF7 — documento de muestra (sintético, DEMO)
+
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif7-riesgos
+
+La NIIF 7 exige revelar la naturaleza y el alcance de los riesgos de crédito, de liquidez y de mercado que surgen de los instrumentos financieros.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif7-liquidez
+
+Sobre el riesgo de liquidez la NIIF 7 exige revelar un análisis de vencimientos de los pasivos financieros que muestre los flujos contractuales remanentes.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif7-credito
+
+La NIIF 7 exige revelar información sobre la exposición máxima al riesgo de crédito, las garantías tomadas y la calidad crediticia de los activos financieros.
+
+Esta sección del documento de muestra desarrolla el requerimiento con contexto adicional para efectos de recuperación por span. El texto que sigue es la afirmación dorada:
+
+## niif7-mercado
+
+La NIIF 7 requiere un análisis de sensibilidad que muestre cómo el resultado y el patrimonio se verían afectados por cambios razonablemente posibles en las variables de mercado.
