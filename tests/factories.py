@@ -2,7 +2,12 @@
 
 from __future__ import annotations
 
+from datetime import UTC, datetime
+
 from ratchet.domain import (
+    ApprovalDecision,
+    ApprovalKind,
+    ApprovalRequest,
     Capa,
     Diagnosis,
     EvalResult,
@@ -132,3 +137,27 @@ def make_run_record(
     seed: int = 42,
 ) -> RunRecord:
     return RunRecord(run_id=run_id, state=state, seed=seed)
+
+
+def make_full_run_record(run_id: str = "run-full") -> RunRecord:
+    """RunRecord completamente poblado (estructura anidada + datetime) para probar roundtrip."""
+    return RunRecord(
+        run_id=run_id,
+        state=RunState.PROMOVIDA,
+        seed=42,
+        before=make_eval_result(recall=0.6),
+        after=make_eval_result(recall=0.8),
+        signal=make_monitor_signal(),
+        diagnosis=make_diagnosis(),
+        verdict=make_gate_verdict(),
+        approvals=(
+            ApprovalRequest(
+                request_id="ap-1",
+                kind=ApprovalKind.CONFIRM_PATCH,
+                proposal_ref="patch-1",
+                decision=ApprovalDecision.APPROVE,
+                decided_by="andres",
+                decided_at=datetime(2026, 7, 5, 12, 0, 0, tzinfo=UTC),
+            ),
+        ),
+    )
