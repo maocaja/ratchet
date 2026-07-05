@@ -10,7 +10,7 @@ from typing import ClassVar
 from rank_bm25 import BM25Okapi
 
 from ratchet.adapter.ports import CorpusFingerprint, RagConfig
-from ratchet.domain import Chunk, Document, Patch, PatchHandle
+from ratchet.domain import Chunk, DataOpError, Document, Patch, PatchHandle
 
 TOKEN_RE = re.compile(r"\w+", re.UNICODE)
 
@@ -19,8 +19,8 @@ class ReindexError(RuntimeError):
     """Fallo reconstruyendo el indice del RAG de muestra."""
 
 
-class DataPatchError(RuntimeError):
-    """Fallo atomico aplicando un parche de datos."""
+class DataPatchError(DataOpError):
+    """Fallo atomico aplicando un parche de datos (es un DataOpError del dominio)."""
 
 
 @dataclass(frozen=True)

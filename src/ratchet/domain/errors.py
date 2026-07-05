@@ -10,3 +10,11 @@ class RagError(RuntimeError):
     vocabulario sin acoplarse entre sí. El evaluador captura SOLO este tipo para degradar
     la corrida a INCONCLUSA (P1); cualquier otra excepción (bug propio) se propaga.
     """
+
+
+class DataOpError(RuntimeError):
+    """Fallo en una operación de datos del RAG (apply_data_patch/reindex atómico — BR-64/65).
+
+    Vocabulario de dominio: el orquestador captura SOLO este tipo para degradar a INCONCLUSA
+    (con revert automático); un bug propio se propaga en vez de enmascararse.
+    """
