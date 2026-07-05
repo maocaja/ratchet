@@ -138,9 +138,14 @@ class SampleRagPatient:
         self._retriever = self._build_retriever()
 
     def revert_data_patch(self, handle: PatchHandle) -> None:
-        patch_doc_id, previous = self._patch_snapshots.pop(
-            handle.handle_id, (handle.patch_id, None)
-        )
+        # Fail-loud ante handle desconocido / doble-revert: es la ruta de seguridad del
+        # trinquete ("revertir a lo seguro es automático"), no puede fallar en silencio ni
+        # confundir claves (patch_id vs doc_id).
+        if handle.handle_id not in self._patch_snapshots:
+            raise DataPatchError(
+                f"revert_data_patch: handle desconocido o ya revertido: {handle.handle_id}"
+            )
+        patch_doc_id, previous = self._patch_snapshots.pop(handle.handle_id)
         if previous is not None:
             self._documents[previous.doc_id] = previous
         else:

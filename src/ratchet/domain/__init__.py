@@ -14,6 +14,7 @@ from ratchet.domain.enums import (
     RunState,
     RunStatus,
 )
+from ratchet.domain.errors import RagError
 from ratchet.domain.models import (
     ApprovalRequest,
     Baseline,
@@ -51,6 +52,7 @@ __all__ = [
     "RunStatus",
     "RunState",
     "TERMINAL_STATES",
+    "RagError",
     "Span",
     "Chunk",
     "Document",

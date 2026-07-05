@@ -8,13 +8,13 @@ from time import sleep
 from typing import TypeVar
 
 from ratchet.adapter.ports import CorpusFingerprint, RagConfig, RagPatientPort
-from ratchet.domain import Chunk, Patch, PatchHandle
+from ratchet.domain import Chunk, Patch, PatchHandle, RagError
 
 T = TypeVar("T")
 
 
-class RetryExhaustedError(RuntimeError):
-    """La operacion fallo despues de agotar los intentos configurados."""
+class RetryExhaustedError(RagError):
+    """La operacion fallo despues de agotar los intentos configurados (es un RagError)."""
 
 
 @dataclass(frozen=True)
@@ -23,7 +23,10 @@ class RetryPolicy:
 
     max_attempts: int = 3
     backoff_seconds: float = 0.0
-    retry_exceptions: tuple[type[Exception], ...] = (Exception,)
+    # Solo reintenta fallos operacionales del RAG (transitorios). Un bug propio (KeyError,
+    # etc.) NO es RagError → se propaga de inmediato, no se reintenta ni se envuelve en
+    # RetryExhaustedError (que es RagError) — así el evaluador no lo enmascara como INCONCLUSA.
+    retry_exceptions: tuple[type[Exception], ...] = (RagError,)
 
     def __post_init__(self) -> None:
         if self.max_attempts < 1:

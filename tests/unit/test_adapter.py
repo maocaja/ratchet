@@ -15,7 +15,7 @@ from ratchet.adapter import (
     RetryPolicy,
     SampleRagPatient,
 )
-from ratchet.domain import Patch
+from ratchet.domain import Patch, PatchHandle, RagError
 
 
 def make_patch(doc_id: str = "niif16", content: str | None = None) -> Patch:
@@ -100,6 +100,26 @@ def test_apply_data_patch_y_revert_restauran_doc_e_indice():
     assert rag.retrieve("clasificacion historica operativos financieros", k=1) == before_retrieval
 
 
+def test_revert_data_patch_falla_ruidoso_ante_handle_desconocido():
+    rag = SampleRagPatient()
+    fantasma = PatchHandle(handle_id="handle:inexistente", patch_id="patch:x", prev_snapshot="")
+
+    with pytest.raises(DataPatchError, match="desconocido o ya revertido"):
+        rag.revert_data_patch(fantasma)
+
+
+def test_revert_data_patch_doble_revert_falla_ruidoso():
+    rag = SampleRagPatient()
+    before = rag.corpus_fingerprint()
+    handle = rag.apply_data_patch(make_patch())
+
+    rag.revert_data_patch(handle)  # primer revert: ok, restaura
+    assert rag.corpus_fingerprint() == before
+
+    with pytest.raises(DataPatchError):  # segundo revert: fail-loud, no no-op silencioso
+        rag.revert_data_patch(handle)
+
+
 def test_reindex_error_revierte_patch_y_senala_inconclusa():
     rag = SampleRagPatient()
     before_fingerprint = rag.corpus_fingerprint()
@@ -123,7 +143,7 @@ def test_retry_policy_reintenta_lecturas_y_no_mutaciones():
         def retrieve(self, query: str, k: int):
             self.retrieve_attempts += 1
             if self.retrieve_attempts == 1:
-                raise RuntimeError("lectura transitoria")
+                raise RagError("lectura transitoria")  # RagError = fallo del RAG → reintentable
             return super().retrieve(query, k)
 
         def apply_data_patch(self, patch: Patch):
@@ -138,6 +158,25 @@ def test_retry_policy_reintenta_lecturas_y_no_mutaciones():
     with pytest.raises(RuntimeError, match="mutacion falla"):
         wrapped.apply_data_patch(make_patch())
     assert inner.patch_attempts == 1
+
+
+def test_retry_policy_no_reintenta_ni_enmascara_bug_no_rag():
+    # Un bug propio (no RagError) NO se reintenta ni se envuelve → se propaga al 1er intento.
+    class BuggyRag(SampleRagPatient):
+        def __init__(self) -> None:
+            super().__init__()
+            self.attempts = 0
+
+        def retrieve(self, query: str, k: int):
+            self.attempts += 1
+            raise KeyError("bug propio, no un fallo transitorio del RAG")
+
+    inner = BuggyRag()
+    wrapped = RetryingRagPatient(inner, RetryPolicy(max_attempts=3))
+
+    with pytest.raises(KeyError):
+        wrapped.retrieve("q", 1)
+    assert inner.attempts == 1
 
 
 def test_retry_wrapper_mutaciones_delegan_sin_retry_policy_call():

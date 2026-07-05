@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import re
 import unicodedata
 from collections.abc import Iterable, Mapping, Sequence
@@ -11,7 +12,18 @@ from typing import Any, Protocol
 
 import numpy as np
 
-from ratchet.domain import Chunk, EvalResult, EvalStatus, GoldenSet, PerItemResult, Span, StateRef
+from ratchet.domain import (
+    Chunk,
+    EvalResult,
+    EvalStatus,
+    GoldenSet,
+    PerItemResult,
+    RagError,
+    Span,
+    StateRef,
+)
+
+logger = logging.getLogger(__name__)
 
 DEFAULT_BOOTSTRAP_SEED = 42
 DEFAULT_BOOTSTRAP_SAMPLES = 1000
@@ -165,7 +177,13 @@ def evaluate(
             topk = rag.retrieve(item.question, k)
             hit = recall_por_span(topk, item.gold_span, tau)
             per_item.append(PerItemResult(item_id=item.item_id, hit=hit, critical=item.critical))
-    except Exception:
+    except RagError as exc:
+        logger.warning(
+            "evaluación inconclusa: fallo del RAG en retrieve (%s): %s",
+            gs.version,
+            exc,
+            exc_info=exc,
+        )
         return EvalResult(
             golden_set_version=gs.version,
             k=k,
@@ -193,7 +211,13 @@ def evaluate(
                 k=k,
                 tau=tau,
             )
-        except Exception:
+        except RagError as exc:
+            logger.warning(
+                "evaluación inconclusa: fallo del RAG en get_config/fingerprint (%s): %s",
+                gs.version,
+                exc,
+                exc_info=exc,
+            )
             return EvalResult(
                 golden_set_version=gs.version,
                 k=k,

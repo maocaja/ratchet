@@ -4,10 +4,12 @@ from __future__ import annotations
 
 import math
 
+import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from ratchet.domain import Chunk, EvalStatus, GoldenSet, Patch
+from ratchet.adapter import RetryingRagPatient, RetryPolicy
+from ratchet.domain import Chunk, EvalStatus, GoldenSet, Patch, RagError
 from ratchet.evaluator import BootstrapEstimator, StateHasher, cubre, evaluate, recall_por_span
 from tests.factories import make_golden_item, make_span
 
@@ -32,17 +34,17 @@ class FakeRag:
 
     def retrieve(self, question: str, k: int) -> tuple[Chunk, ...]:
         if self._fail:
-            raise RuntimeError("retrieve failed")
+            raise RagError("retrieve failed")
         return self._retrieved.get(question, ())[:k]
 
     def get_config(self) -> dict:
         if self._fail_config:
-            raise RuntimeError("config read failed")
+            raise RagError("config read failed")
         return self._config
 
     def corpus_fingerprint(self) -> tuple[tuple[str, str], ...]:
         if self._fail_fingerprint:
-            raise RuntimeError("fingerprint read failed")
+            raise RagError("fingerprint read failed")
         return self._fingerprint
 
 
@@ -108,6 +110,41 @@ def test_evaluate_retrieve_failure_returns_inconclusa():
     assert result.status is EvalStatus.INCONCLUSA
     assert result.recall_span == 0.0
     assert result.per_item == ()
+
+
+def test_evaluate_no_enmascara_bugs_no_rag():
+    # Un error que NO es RagError (bug propio) debe propagarse, no degradarse a inconclusa.
+    class BuggyRag(FakeRag):
+        def retrieve(self, question: str, k: int):
+            raise KeyError("bug interno, no un fallo del RAG")
+
+    gs = GoldenSet(version="gs-v1", items=(make_golden_item(question="q"),))
+
+    with pytest.raises(KeyError):
+        evaluate(BuggyRag({}), gs)
+
+
+def test_evaluate_con_retry_wrapper_no_enmascara_bug():
+    # Composición realista (CG-1): RetryingRagPatient NO debe convertir un bug en INCONCLUSA.
+    class BuggyRag(FakeRag):
+        def retrieve(self, question: str, k: int):
+            raise KeyError("bug interno, no un fallo del RAG")
+
+    gs = GoldenSet(version="gs-v1", items=(make_golden_item(question="q"),))
+    wrapped = RetryingRagPatient(BuggyRag({}), RetryPolicy(max_attempts=2))
+
+    with pytest.raises(KeyError):
+        evaluate(wrapped, gs)
+
+
+def test_evaluate_config_read_failure_returns_inconclusa():
+    gs = GoldenSet(version="gs-v1", items=(make_golden_item(question="q"),))
+    rag = FakeRag({"q": (make_chunk(),)}, fail_config=True)
+
+    result = evaluate(rag, gs, state_hasher=StateHasher())
+
+    assert result.status is EvalStatus.INCONCLUSA
+    assert result.state_ref is None
 
 
 def test_bootstrap_same_input_and_seed_is_bit_exact():
