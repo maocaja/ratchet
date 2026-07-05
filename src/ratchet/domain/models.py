@@ -235,6 +235,14 @@ class GoldenSet(BaseModel):
     items: tuple[GoldenItem, ...] = ()
     created_at: datetime | None = None
 
+    @model_validator(mode="after")
+    def _item_ids_unicos(self) -> GoldenSet:
+        # item_id únicos: el gate parea before/after por item_id (BL-4); un duplicado lo rompería.
+        ids = [item.item_id for item in self.items]
+        if len(ids) != len(set(ids)):
+            raise ValueError("GoldenSet requiere item_id únicos")
+        return self
+
 
 class Baseline(BaseModel):
     """EvalResult congelado como referencia estable."""

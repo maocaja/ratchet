@@ -23,6 +23,7 @@ from ratchet.domain import (
     GateDecision,
     GateVerdict,
     GoldenItem,
+    GoldenSet,
     Patch,
     PerItemResult,
     Report,
@@ -128,6 +129,12 @@ def test_golden_set_tiene_items_y_critico():
     gs = make_golden_set(n=3)
     assert len(gs.items) == 3
     assert any(it.critical for it in gs.items)
+
+
+def test_golden_set_rechaza_item_id_duplicado():
+    item = make_golden_set(n=1).items[0]
+    with pytest.raises(ValidationError):
+        GoldenSet(version="gs-dup", items=(item, item))
 
 
 # ── GateVerdict: invariante del guardrail 🔒 (BR-34) ─────────────────────────
