@@ -7,7 +7,7 @@ import math
 from hypothesis import given
 from hypothesis import strategies as st
 
-from ratchet.domain import Chunk, EvalStatus, GoldenSet
+from ratchet.domain import Chunk, EvalStatus, GoldenSet, Patch
 from ratchet.evaluator import BootstrapEstimator, StateHasher, cubre, evaluate, recall_por_span
 from tests.factories import make_golden_item, make_span
 
@@ -20,11 +20,15 @@ class FakeRag:
         config: dict | None = None,
         fingerprint: tuple[tuple[str, str], ...] = (),
         fail: bool = False,
+        fail_config: bool = False,
+        fail_fingerprint: bool = False,
     ) -> None:
         self._retrieved = retrieved
         self._config = config or {"retriever": {"k": 5, "model": "bm25"}}
         self._fingerprint = fingerprint or (("doc-a", " Texto   Fuente "),)
         self._fail = fail
+        self._fail_config = fail_config
+        self._fail_fingerprint = fail_fingerprint
 
     def retrieve(self, question: str, k: int) -> tuple[Chunk, ...]:
         if self._fail:
@@ -32,9 +36,13 @@ class FakeRag:
         return self._retrieved.get(question, ())[:k]
 
     def get_config(self) -> dict:
+        if self._fail_config:
+            raise RuntimeError("config read failed")
         return self._config
 
     def corpus_fingerprint(self) -> tuple[tuple[str, str], ...]:
+        if self._fail_fingerprint:
+            raise RuntimeError("fingerprint read failed")
         return self._fingerprint
 
 
@@ -133,6 +141,29 @@ def test_state_ref_includes_eval_params_so_tau_changes_key():
     assert tau_08.key() != tau_09.key()
     assert tau_08.tau == 0.8
     assert tau_09.tau == 0.9
+
+
+def test_state_hasher_accepts_pydantic_patch_model():
+    patch = Patch(
+        patch_id="patch-1",
+        doc_id="doc-a",
+        new_content="contenido corregido",
+        rationale="span faltante",
+        patch_hash="precomputed-patch-hash",
+    )
+
+    assert StateHasher().patch_hash(patch) == "precomputed-patch-hash"
+
+
+def test_evaluate_state_read_failure_returns_inconclusa():
+    gs = GoldenSet(version="gs-v1", items=(make_golden_item(question="q"),))
+    rag = FakeRag({"q": (make_chunk(),)}, fail_fingerprint=True)
+
+    result = evaluate(rag, gs, state_hasher=StateHasher())
+
+    assert result.status is EvalStatus.INCONCLUSA
+    assert result.state_ref is None
+    assert result.per_item == ()
 
 
 @given(

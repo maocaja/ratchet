@@ -87,9 +87,21 @@ class BootstrapEstimator:
 class StateHasher:
     """Build StateRef from the canonical state-hash rules in NFR design §P-1."""
 
-    @staticmethod
-    def canonical_json(value: Any) -> str:
-        return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    @classmethod
+    def canonical_value(cls, value: Any) -> Any:
+        if hasattr(value, "model_dump"):
+            return value.model_dump(mode="json")
+        if isinstance(value, Mapping):
+            return {key: cls.canonical_value(item) for key, item in value.items()}
+        if isinstance(value, Sequence) and not isinstance(value, str | bytes | bytearray):
+            return [cls.canonical_value(item) for item in value]
+        return value
+
+    @classmethod
+    def canonical_json(cls, value: Any) -> str:
+        return json.dumps(
+            cls.canonical_value(value), sort_keys=True, separators=(",", ":"), ensure_ascii=False
+        )
 
     @classmethod
     def hash_value(cls, value: Any) -> str:
@@ -111,6 +123,9 @@ class StateHasher:
     def patch_hash(cls, patch: Any | None) -> str | None:
         if patch is None:
             return None
+        existing_hash = getattr(patch, "patch_hash", None)
+        if isinstance(existing_hash, str):
+            return existing_hash
         return cls.hash_value(patch)
 
     def state_ref(
@@ -170,14 +185,26 @@ def evaluate(
 
     state_ref = None
     if state_hasher is not None:
-        state_ref = state_hasher.state_ref(
-            golden_set_version=gs.version,
-            config=rag.get_config(),
-            corpus_fingerprint=rag.corpus_fingerprint(),
-            patch=patch,
-            k=k,
-            tau=tau,
-        )
+        try:
+            state_ref = state_hasher.state_ref(
+                golden_set_version=gs.version,
+                config=rag.get_config(),
+                corpus_fingerprint=rag.corpus_fingerprint(),
+                patch=patch,
+                k=k,
+                tau=tau,
+            )
+        except Exception:
+            return EvalResult(
+                golden_set_version=gs.version,
+                k=k,
+                tau=tau,
+                recall_span=0.0,
+                per_item=(),
+                ci=(0.0, 0.0),
+                critical_recall=0.0,
+                status=EvalStatus.INCONCLUSA,
+            )
 
     return EvalResult(
         golden_set_version=gs.version,
