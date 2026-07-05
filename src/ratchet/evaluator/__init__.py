@@ -123,9 +123,8 @@ class StateHasher:
     def patch_hash(cls, patch: Any | None) -> str | None:
         if patch is None:
             return None
-        existing_hash = getattr(patch, "patch_hash", None)
-        if isinstance(existing_hash, str):
-            return existing_hash
+        if hasattr(patch, "model_dump"):
+            return cls.hash_value(patch.model_dump(mode="json", exclude={"patch_hash"}))
         return cls.hash_value(patch)
 
     def state_ref(

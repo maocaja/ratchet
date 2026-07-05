@@ -143,7 +143,7 @@ def test_state_ref_includes_eval_params_so_tau_changes_key():
     assert tau_09.tau == 0.9
 
 
-def test_state_hasher_accepts_pydantic_patch_model():
+def test_state_hasher_accepts_pydantic_patch_model_without_using_embedded_hash():
     patch = Patch(
         patch_id="patch-1",
         doc_id="doc-a",
@@ -152,7 +152,27 @@ def test_state_hasher_accepts_pydantic_patch_model():
         patch_hash="precomputed-patch-hash",
     )
 
-    assert StateHasher().patch_hash(patch) == "precomputed-patch-hash"
+    assert StateHasher().patch_hash(patch) != "precomputed-patch-hash"
+
+
+def test_state_hasher_patch_hash_uses_canonical_patch_payload():
+    hasher = StateHasher()
+    first = Patch(
+        patch_id="patch-1",
+        doc_id="doc-a",
+        new_content="contenido corregido",
+        rationale="span faltante",
+        patch_hash="stale-caller-hash",
+    )
+    second = Patch(
+        patch_id="patch-1",
+        doc_id="doc-a",
+        new_content="otro contenido",
+        rationale="span faltante",
+        patch_hash="stale-caller-hash",
+    )
+
+    assert hasher.patch_hash(first) != hasher.patch_hash(second)
 
 
 def test_evaluate_state_read_failure_returns_inconclusa():
