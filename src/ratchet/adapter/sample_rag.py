@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import ClassVar
 
 from rank_bm25 import BM25Okapi
@@ -72,25 +73,7 @@ class LexicalRetriever:
 class SampleRagPatient:
     """Paciente RAG hermetico: corpus NIIF/NIA, BM25 y generacion stub."""
 
-    DEFAULT_DOCUMENTS: ClassVar[tuple[Document, ...]] = (
-        Document(
-            doc_id="niif-16-vieja",
-            version="vieja",
-            text=(
-                "NIIF 16 version vieja: la clasificacion historica distingue arrendamientos "
-                "operativos y financieros para el arrendatario. Este documento esta sembrado "
-                "como regresion para el camino NIIF."
-            ),
-        ),
-        Document(
-            doc_id="nia-500",
-            version="vigente",
-            text=(
-                "NIA 500 evidencia de auditoria: el auditor disena y aplica procedimientos "
-                "para obtener evidencia suficiente y adecuada."
-            ),
-        ),
-    )
+    DEFAULT_CORPUS_DIR: ClassVar[Path] = Path(__file__).resolve().parents[3] / "seeds" / "corpus"
 
     def __init__(
         self,
@@ -99,9 +82,8 @@ class SampleRagPatient:
         *,
         fail_next_reindex: bool = False,
     ) -> None:
-        self._documents = {
-            document.doc_id: document for document in documents or self.DEFAULT_DOCUMENTS
-        }
+        source_documents = documents or _load_seed_documents(self.DEFAULT_CORPUS_DIR)
+        self._documents = {document.doc_id: document for document in source_documents}
         self._config: RagConfig = dict(config or {"retriever": "bm25", "chunking": "whole-doc"})
         self._patch_snapshots: dict[str, tuple[str, Document | None]] = {}
         self._fail_next_reindex = fail_next_reindex
@@ -182,3 +164,18 @@ def _tokenize(text: str) -> list[str]:
 
 def _overlap_count(query_tokens: set[str], document_tokens: list[str]) -> int:
     return len(query_tokens.intersection(document_tokens))
+
+
+def _load_seed_documents(corpus_dir: Path) -> tuple[Document, ...]:
+    documents: list[Document] = []
+    for path in sorted(corpus_dir.glob("*.txt")):
+        documents.append(
+            Document(
+                doc_id=path.stem,
+                version="seed",
+                text=path.read_text(encoding="utf-8"),
+            )
+        )
+    if not documents:
+        raise FileNotFoundError(f"corpus de muestra vacio o ausente: {corpus_dir}")
+    return tuple(documents)

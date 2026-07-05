@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import inspect
 import os
+from pathlib import Path
 
 import pytest
 
+import ratchet.adapter as adapter_package
 from ratchet.adapter import (
     DataPatchError,
     RetryingRagPatient,
@@ -16,7 +18,7 @@ from ratchet.adapter import (
 from ratchet.domain import Patch
 
 
-def make_patch(doc_id: str = "niif-16-vieja", content: str | None = None) -> Patch:
+def make_patch(doc_id: str = "niif16", content: str | None = None) -> Patch:
     return Patch(
         patch_id=f"patch:{doc_id}",
         doc_id=doc_id,
@@ -64,20 +66,24 @@ def test_corpus_fingerprint_devuelve_contenido_crudo_ordenado():
     assert all(
         isinstance(doc_id, str) and isinstance(content, str) for doc_id, content in fingerprint
     )
-    assert any(
-        doc_id == "niif-16-vieja" and "version vieja" in content for doc_id, content in fingerprint
-    )
+    assert any(doc_id == "niif16" and "VERSIÓN VIEJA" in content for doc_id, content in fingerprint)
+    assert {doc_id for doc_id, _content in fingerprint} == {
+        path.stem for path in Path("seeds/corpus").glob("*.txt")
+    }
 
 
-def test_corpus_base_excluye_niif16_vigente_hasta_parche():
+def test_corpus_base_carga_seeds_y_excluye_niif16_vigente_hasta_parche():
     rag = SampleRagPatient()
+    vigente_text = Path("seeds/corpus_vigente/niif16.txt").read_text(encoding="utf-8")
 
-    assert all(doc_id != "niif-16-vigente" for doc_id, _ in rag.corpus_fingerprint())
-    assert rag.retrieve("derecho pasivo arrendamiento", k=1) == []
+    assert dict(rag.corpus_fingerprint())["niif16"] == Path("seeds/corpus/niif16.txt").read_text(
+        encoding="utf-8"
+    )
+    assert vigente_text not in {content for _doc_id, content in rag.corpus_fingerprint()}
 
-    rag.apply_data_patch(make_patch())
+    rag.apply_data_patch(make_patch(content=vigente_text))
 
-    assert rag.retrieve("derecho pasivo arrendamiento", k=1)[0].doc_id == "niif-16-vieja"
+    assert dict(rag.corpus_fingerprint())["niif16"] == vigente_text
 
 
 def test_apply_data_patch_y_revert_restauran_doc_e_indice():
@@ -89,7 +95,7 @@ def test_apply_data_patch_y_revert_restauran_doc_e_indice():
     patched_retrieval = rag.retrieve("derecho pasivo arrendamiento", k=1)
     rag.revert_data_patch(handle)
 
-    assert patched_retrieval[0].doc_id == "niif-16-vieja"
+    assert patched_retrieval[0].doc_id == "niif16"
     assert rag.corpus_fingerprint() == before_fingerprint
     assert rag.retrieve("clasificacion historica operativos financieros", k=1) == before_retrieval
 
@@ -140,3 +146,11 @@ def test_retry_wrapper_mutaciones_delegan_sin_retry_policy_call():
 
     assert "_retry_policy" not in apply_source
     assert "_retry_policy" not in reindex_source
+
+
+def test_adapter_barrel_no_importa_llmport():
+    init_source = inspect.getsource(adapter_package)
+
+    assert "ratchet.adapter.llm" not in init_source
+    assert "LlmPort" not in adapter_package.__all__
+    assert not hasattr(adapter_package, "LlmPort")
