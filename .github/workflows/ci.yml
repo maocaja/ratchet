@@ -39,5 +39,8 @@ jobs:
       - name: Pytest (unit + PBT)
         # exit 5 = "no tests collected" (dir vacío) → tratarlo como éxito
         run: uv run pytest tests/unit -q || [ $? -eq 5 ]
-      - name: Pytest (integración + e2e NIIF hermético, sin ANTHROPIC_API_KEY)
-        run: uv run pytest tests/integration tests/e2e -q || [ $? -eq 5 ]
+      - name: Pytest (integración, sin ANTHROPIC_API_KEY)
+        run: uv run pytest tests/integration -q || [ $? -eq 5 ]
+      - name: Pytest (e2e NIIF hermético, sin ANTHROPIC_API_KEY)
+        # el e2e SIEMPRE debe correr: sin tolerar exit 5, así un e2e que desaparece rompe el CI
+        run: uv run pytest tests/e2e -q
