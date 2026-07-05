@@ -29,6 +29,7 @@ hooks:
     git clone --depth 1 'https://github.com/maocaja/ratchet.git' .
   before_run: |
     git status --short
+    uv sync --all-extras
   after_run: |
     git status --short
   before_remove: |
