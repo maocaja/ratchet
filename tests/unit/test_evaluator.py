@@ -49,22 +49,40 @@ class FakeRag:
 
 
 def make_chunk(
-    doc_id: str = "doc-a", start: int = 0, end: int = 10, chunk_id: str = "ch-1"
+    doc_id: str = "doc-a",
+    start: int = 0,
+    end: int = 10,
+    chunk_id: str = "ch-1",
+    text: str = "texto dorado",  # default alineado con make_span (para que cubre() halle el texto)
 ) -> Chunk:
-    return Chunk(chunk_id=chunk_id, doc_id=doc_id, start=start, end=end, text="", rank=0)
+    return Chunk(chunk_id=chunk_id, doc_id=doc_id, start=start, end=end, text=text, rank=0)
 
 
 def test_cubre_usa_mismo_doc_e_interseccion_de_intervalos():
     span = make_span(doc_id="doc-a", start=10, end=20, text="0123456789")
+    txt = "0123456789"  # el texto del span debe estar en el chunk para que cubra
 
-    assert cubre(make_chunk(doc_id="doc-b", start=10, end=20), span) == 0.0
-    assert cubre(make_chunk(start=12, end=18), span) == 0.6
-    assert cubre(make_chunk(start=0, end=100), span) == 1.0
+    assert cubre(make_chunk(doc_id="doc-b", start=10, end=20, text=txt), span) == 0.0
+    assert cubre(make_chunk(start=12, end=18, text=txt), span) == 0.6
+    assert cubre(make_chunk(start=0, end=100, text=txt), span) == 1.0
+
+
+def test_cubre_es_cero_si_el_texto_del_span_no_esta_en_el_chunk():
+    # Fix fuente-vieja (🔒): aunque los offsets solapen, si el texto del span no está → no cubre.
+    span = make_span(doc_id="doc-a", start=0, end=10, text="el span vigente")
+    chunk = make_chunk(start=0, end=100, text="contenido derogado, otra norma distinta")
+
+    assert (
+        cubre(chunk, span) == 0.0
+    )  # offsets solapan pero el texto no está → falso positivo evitado
 
 
 def test_recall_por_span_aplica_tau_sobre_mejor_cobertura():
     span = make_span(doc_id="doc-a", start=10, end=20, text="0123456789")
-    chunks = (make_chunk(start=0, end=17), make_chunk(start=10, end=18))
+    chunks = (
+        make_chunk(start=0, end=17, text="0123456789"),
+        make_chunk(start=10, end=18, text="0123456789"),
+    )
 
     assert recall_por_span(chunks, span, tau=0.8) is True
     assert recall_por_span(chunks, span, tau=0.9) is False

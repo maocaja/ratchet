@@ -34,7 +34,10 @@ class HitRag:
 
     def retrieve(self, question: str, k: int) -> list[Chunk]:
         if question in self._hits:
-            return [Chunk(chunk_id="c", doc_id="doc-a", start=0, end=10, text="x", rank=0)]
+            # el texto cubre el span dorado (make_span default text="texto dorado")
+            return [
+                Chunk(chunk_id="c", doc_id="doc-a", start=0, end=10, text="texto dorado", rank=0)
+            ]
         return []
 
     def get_config(self) -> dict:

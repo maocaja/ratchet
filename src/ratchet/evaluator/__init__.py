@@ -49,9 +49,17 @@ def normalize(text: str) -> str:
 
 
 def cubre(chunk: Chunk, span: Span) -> float:
-    """Return the fraction of `span` covered by `chunk`, using same-doc intervals only."""
+    """Fracción del `span` cubierta por `chunk` (mismo doc), condicionada a que el TEXTO del span
+    esté presente en el chunk.
+
+    Los offsets del golden set se definen sobre el documento VIGENTE; si el corpus cambia
+    (fuente-vieja), esos offsets quedan obsoletos y un chunk del doc viejo podría "cubrir" el rango
+    numérico sin contener el texto real. Exigir el texto evita ese falso positivo (🔒 BR-34).
+    """
 
     if chunk.doc_id != span.doc_id:
+        return 0.0
+    if normalize(span.text) not in normalize(chunk.text):
         return 0.0
 
     intersection = max(0, min(chunk.end, span.end) - max(chunk.start, span.start))

@@ -42,7 +42,7 @@ def test_camino_niif_feliz_a_completada_sin_api_key(monkeypatch):
 
     assert run.state is RunState.COMPLETADA
     assert report.decision is ReportDecision.DEPLOY
-    assert report.recall_before < report.recall_after  # recall recuperado (0.86 → 1.00)
+    assert report.recall_before < report.recall_after  # recall recuperado (0.84 → 1.00)
     assert report.recall_after == 1.0
     assert "ANTHROPIC_API_KEY" not in os.environ  # corrió sin secreto de red
 

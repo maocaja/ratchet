@@ -56,7 +56,9 @@ class ScenarioRag:
             raise RagError("re-eval post-parche caída")
         if self._hits(question):
             doc = "niif16" if question == "q0" else "doc-a"
-            return [Chunk(chunk_id=f"{doc}:0", doc_id=doc, start=0, end=1000, text="x", rank=0)]
+            # el texto del chunk contiene el span dorado (cubre() ahora lo exige)
+            text = "el span vigente de niif16" if doc == "niif16" else "texto dorado"
+            return [Chunk(chunk_id=f"{doc}:0", doc_id=doc, start=0, end=1000, text=text, rank=0)]
         return []
 
     def generate(self, query: str, context: list[Chunk]) -> str:
@@ -298,7 +300,8 @@ class _PartialRag:
     """Recupera el span PARCIALmente (miss en eval) pero todas las sondas dan bien → ambiguo."""
 
     def retrieve(self, question: str, k: int) -> list[Chunk]:
-        return [Chunk(chunk_id="c", doc_id="doc-a", start=0, end=40, text="x", rank=0)]  # 40/100
+        # texto presente (cubre>0) pero offset parcial 40/100 (< tau) → miss en eval, sonda topk OK
+        return [Chunk(chunk_id="c", doc_id="doc-a", start=0, end=40, text="el span dorado", rank=0)]
 
     def generate(self, query: str, context: list[Chunk]) -> str:
         return "el span dorado presente"
