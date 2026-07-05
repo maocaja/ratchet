@@ -68,4 +68,4 @@ def test_camino_niif_parche_que_empeora_lo_revierte(monkeypatch):
 
     assert run.state is RunState.REVERTIDA  # el gate revirtió antes de llegar al deploy
     assert run.verdict is not None and run.verdict.regressions_criticas >= 1  # 🔒 clase crítica
-    assert run.verdict.criterio == "reg_crit>0 (🔒)"  # revirtió POR el guardrail crítico, no por delta
+    assert run.verdict.criterio == "reg_crit>0 (🔒)"  # revirtió POR el 🔒, no por el delta
