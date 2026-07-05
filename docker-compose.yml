@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ratchet
+      POSTGRES_PASSWORD: ratchet
+      POSTGRES_DB: ratchet
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ratchet"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://ratchet:ratchet@db:5432/ratchet
+      # ANTHROPIC_API_KEY: condicional — el camino NIIF es hermético (no lo necesita).
+    # entrypoint: alembic upgrade head && uvicorn ratchet.api.app:app --host 0.0.0.0
+    command: ["python", "-c", "print('ratchet app — scaffold; entrypoint real en TASK-012')"]
+
+volumes:
+  pgdata:

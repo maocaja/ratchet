@@ -10,7 +10,9 @@ Chequea: ≥50 ítems, campos requeridos, offsets que cuadran con el corpus vige
 ≥1 crítico, ≥1 ligado a NIIF 16, y la guía léxica (pregunta comparte vocabulario con el span).
 NO valida la corrección contable — esa es tu parte humana (BR-76).
 """
+
 from __future__ import annotations
+
 import re
 import sys
 import unicodedata

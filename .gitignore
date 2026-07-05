@@ -41,3 +41,4 @@ eval-runs/
 .idea/
 .vscode/
 *.log
+!.env.example
