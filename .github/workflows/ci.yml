@@ -3,7 +3,10 @@ name: CI
 on:
   push:
     branches: [main]
+    paths: ["src/**", "tests/**", "pyproject.toml", "uv.lock", ".github/workflows/**"]
   pull_request:
+    paths: ["src/**", "tests/**", "pyproject.toml", "uv.lock"]
+  workflow_dispatch: # permite correr manualmente cuando quieras
 
 jobs:
   quality:
@@ -34,6 +37,7 @@ jobs:
       - name: Import-linter (G2 — gate/orchestrator sin LLM)
         run: uv run lint-imports
       - name: Pytest (unit + PBT)
-        run: uv run pytest tests/unit -q
+        # exit 5 = "no tests collected" (dir vacío) → tratarlo como éxito
+        run: uv run pytest tests/unit -q || [ $? -eq 5 ]
       - name: Pytest (integración + e2e NIIF hermético, sin ANTHROPIC_API_KEY)
-        run: uv run pytest tests/integration tests/e2e -q
+        run: uv run pytest tests/integration tests/e2e -q || [ $? -eq 5 ]
