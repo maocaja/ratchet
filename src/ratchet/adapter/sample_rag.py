@@ -89,6 +89,11 @@ class SampleRagPatient:
         self._fail_next_reindex = fail_next_reindex
         self._retriever = self._build_retriever()
 
+    @classmethod
+    def from_corpus_dir(cls, corpus_dir: Path, **kwargs: object) -> SampleRagPatient:
+        """Construye el RAG cargando el corpus desde un directorio (API pública, costura P5)."""
+        return cls(documents=_load_seed_documents(corpus_dir), **kwargs)  # type: ignore[arg-type]
+
     def retrieve(self, query: str, k: int) -> list[Chunk]:
         return self._retriever.retrieve(query, k)
 

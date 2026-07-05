@@ -61,11 +61,20 @@ def build_report(run: RunRecord) -> Report:
         state_ref = run.after.state_ref
     elif run.before is not None:
         state_ref = run.before.state_ref
+    recall_before = run.before.recall_span if run.before is not None else None
+    recall_after = run.after.recall_span if run.after is not None else None
+    # delta del reporte = RECUPERACIÓN (after − before), la historia antes/después; el delta del
+    # gate (after vs baseline) vive en ci_delta/verdict, distinto eje.
+    recovery = (
+        recall_after - recall_before
+        if recall_before is not None and recall_after is not None
+        else (run.verdict.delta if run.verdict is not None else None)
+    )
     return Report(
         run_id=run.run_id,
-        recall_before=run.before.recall_span if run.before is not None else None,
-        recall_after=run.after.recall_span if run.after is not None else None,
-        delta=run.verdict.delta if run.verdict is not None else None,
+        recall_before=recall_before,
+        recall_after=recall_after,
+        delta=recovery,
         ci_delta=run.verdict.ci_delta if run.verdict is not None else None,
         change=run.patch.rationale if run.patch is not None else None,
         writeup_id=run.writeup_id,

@@ -53,7 +53,7 @@ def test_build_report_recomputable_desde_datos_versionados():
     assert build_report(reconstruido) == report
     assert report.recall_before == run.before.recall_span
     assert report.recall_after == run.after.recall_span
-    assert report.delta == run.verdict.delta
+    assert report.delta == run.after.recall_span - run.before.recall_span  # recuperación
     assert report.reproducible_from == run.after.state_ref
 
 
