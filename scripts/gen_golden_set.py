@@ -2,6 +2,8 @@
 # /// script
 # dependencies = ["pyyaml"]
 # ///
+# ruff: noqa: E501
+# fmt: off
 """Genera el fixture de DEMO de RAT-5: corpus NIIF/NIA de muestra + golden set (≥50 ítems).
 
 ⚠️ DATOS DE MUESTRA SINTÉTICOS, revisables por un humano (BR-76) — NO son normas contables
