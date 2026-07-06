@@ -5,7 +5,7 @@
 - **Project Type**: Greenfield
 - **AI-DLC Version**: v0.1.8 (AWS Labs aidlc-workflows)
 - **Start Date**: 2026-07-03T01:21:55Z
-- **Current Stage**: CONSTRUCTION · U1 — Specs COMPLETAS y **conformes al runbook E5** (Act 1-4: Functional ✅ · NFR Req ✅ · NFR Design ✅ · Infra ✅) → **Code Generation (Act 5-6) EN PAUSA** por decisión del usuario
+- **Current Stage**: CONSTRUCTION · **U1 COMPLETO** (Code Gen + Build&Test ✅ — 14 tareas RAT-5…18, 184 tests, CI 4 gates, G2 KEPT). **Pivote v2 (2026-07-05):** reencuadre agéntico (`definicion.md`) → la unidad actual es **U2 · Investigador Agéntico**. Ver *Re-scope de unidades v2* abajo.
 
 ## Workspace State
 - **Existing Code**: No
@@ -15,7 +15,7 @@
 ## Inputs (pre-AI-DLC artifacts)
 - `specs/prd.md` — PRD completo (13 segmentos) — insumo principal de Requirements
 - `specs/arquitectura.md` — Arquitectura v1 (C4 + NFR + SPOF)
-- `docs/pvb.md`, `docs/definicion.md`, `docs/critica.md` — visión, estrella polar, auditoría de paneles
+- `docs/definicion.md` — **estrella polar v2 (agéntica, 2026-07-05)**; v1 preservada en `definicion-v1-eval.md`. Contexto del pivote: `docs/critica-panel-agentico.md` + `docs/investigacion-2026.md`. También `pvb.md`, `critica.md`.
 
 ## Code Location Rules
 - **Application Code**: Workspace root (NEVER in aidlc-docs/)
@@ -40,12 +40,25 @@
 **✅ FASE INCEPTION COMPLETA (2026-07-03).** Siguiente: CONSTRUCTION por unidad, empezando por U1 · Camino NIIF.
 
 ### 🟢 CONSTRUCTION PHASE
+**U1 · Camino NIIF — COMPLETO ✅** (14 tareas RAT-5…18, 184 tests, CI 4 gates, G2 KEPT; incluye el fix del falso positivo de `cubre()` — 🔒 BR-34). Bitácora del detalle: memoria `u1-completo.md`.
 - [x] Functional Design — EXECUTE (U1, aprobado 2026-07-03)
 - [x] NFR Requirements — EXECUTE (ligero) (U1, aprobado 2026-07-03)
 - [x] NFR Design — EXECUTE (U1, aprobado 2026-07-03)
 - [x] Infrastructure Design — EXECUTE (mínimo) (U1, aprobado 2026-07-03)
-- [ ] Code Generation — EXECUTE  ← **siguiente**
-- [ ] Build and Test — EXECUTE
+- [x] Code Generation — EXECUTE (U1 ✅ — se levantó la pausa)
+- [x] Build and Test — EXECUTE (U1 ✅ — 184 tests, e2e NIIF hermético)
+
+**U2 · Investigador Agéntico — SIGUIENTE** → sub-cascada propia (Requirements → Functional → NFR → Infra → Code Gen → Build&Test), igual que U1.
+
+## Re-scope de unidades v2 (2026-07-06) — tras el pivote agéntico
+Loop-back deliberado en la cascada (HITL, forward-only; registrado en `audit.md`). Regla del framework respetada: **1 propósito por unidad.** Las unidades originales de Inception quedan como registro histórico (`unit-of-work.md` lleva la nota de reconciliación).
+
+| Unidad | Propósito único | Estado |
+|---|---|---|
+| **U1** | 🔒 Sustrato determinista (Camino NIIF) | ✅ completo — intacto |
+| **U2** | **Investigador Agéntico:** incidente de contradictorios + loop de razonamiento + RAG externo propio (ADR-008) + **eval del agente** + *definir* la política de autonomía | siguiente |
+| **U3** | Credibilidad: 2º paciente (AnythingLLM) + faithfulness + robustez | diferido |
+| **U4 / backlog** | Rama config + Experimenter + *demostrar* el auto-config | diferido **explícito** (no enterrado) |
 
 ### 🟡 OPERATIONS PHASE
 - [ ] Operations — PLACEHOLDER

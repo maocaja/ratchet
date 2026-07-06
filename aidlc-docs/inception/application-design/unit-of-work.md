@@ -3,6 +3,17 @@
 > Decisiones: Q1=A (vertical, walking-skeleton primero) · Q2=A (3 unidades) · Q3=A (monolito modular, un desplegable) · Q4=A (`src/ratchet/<módulo>/`).
 > Unidades de **desarrollo** (no de despliegue). Orden de construcción: **U1 → U2 → U3**.
 
+> **⚠️ Reconciliación v2 (2026-07-06) — leer primero.** Tras el pivote agéntico (`docs/definicion.md` v2), las unidades se **re-scopearon** (decisión deliberada, registrada en `audit.md`; no se reabre Inception). **Lo de abajo es el registro histórico de Inception (v1); para U2+ manda este re-scope:**
+>
+> | Unidad | Propósito único (v2) | Estado |
+> |---|---|---|
+> | **U1** | Sustrato determinista (Camino NIIF) | ✅ completo — intacto |
+> | **U2** | **Investigador Agéntico:** contradictorios + loop de razonamiento + RAG externo propio (ADR-008) + eval del agente + *definir* política de autonomía | **siguiente** |
+> | **U3** | Credibilidad: 2º paciente (AnythingLLM) + faithfulness + robustez | diferido |
+> | **U4 / backlog** | Rama config + Experimenter + *demostrar* auto-config | diferido **explícito** |
+>
+> **Motivo:** el viejo *"U2 · Rama Config"* (abajo) no demostraba agencia; el Investigador Agéntico ocupa U2 (regla 1-propósito). El viejo U2 (config) **baja a U4/backlog** (no se entierra en U3). `unit-of-work-story-map.md` y `-dependency.md` quedan como **registro histórico v1** (superseded para U2+ por esta nota). Las historias de U2 son **nuevas** → se generan en Requirements de U2, no acá.
+
 ## U1 · Camino NIIF (walking skeleton) — Must 🎯
 - **Objetivo:** rebanada vertical **end-to-end de la rama de datos** — el entregable no-negociable (Q7).
 - **Alcance:** conectar adaptador (ops de datos), golden set ≥50 con span, baseline, evaluación (recall-por-span), monitor que detecta la caída, investigador que localiza "fuente-vieja" + writeup, parche con confirmación humana, aplicar+reindex, gate con revert, aprobación humana, reporte antes/después.

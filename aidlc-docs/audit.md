@@ -260,3 +260,18 @@ Re-validado: 14/14 tareas, 4 milestones, DAG acíclico, CG-2 en 004+011.
 **Context**: E7 — arnés decidido. Ejecución en manos del usuario + Codex.
 
 ---
+
+## CONSTRUCTION · U1 — Code Generation + Build&Test COMPLETO (registro retroactivo)
+**Timestamp**: 2026-07-05 (fecha lógica; construido entre 2026-07-04 y 07-05)
+**AI Response**: Se levantó la pausa de código y se construyó **U1 · Camino NIIF end-to-end**, tarea por tarea (RAT-5…18, 14 tareas), con bucle test-alongside + subagente `code-reviewer` y los 4 gates (ruff · import-linter G2 · pytest unit/PBT · pytest integración+e2e). Resultado: **184 tests**, e2e NIIF hermético (sin `ANTHROPIC_API_KEY`, sin red), CI verde, **G2 KEPT**. Carry-overs CG-1…CG-4 resueltos en implementación. **Hallazgo del review de RAT-18 corregido:** `cubre()` daba un falso positivo del recall (comparaba solo offsets) → ahora exige que el texto del span esté en el chunk (🔒 BR-34, `fix ff63bfa`). El log de audit no había registrado esta fase; se registra ahora para que el estado no mienta ("Code Generation ← siguiente" era falso). Detalle: memoria `u1-completo.md`.
+**Context**: CONSTRUCTION — U1 COMPLETO. Restaura la verdad #1 (U1 se construyó).
+
+---
+
+## Re-scope de unidades v2 — pivote agéntico (decisión deliberada, forward-only)
+**Timestamp**: 2026-07-06 (fecha lógica)
+**User Input**: Tras 2º panel de expertos (agéntico) + investigación de mercado (jul 2026): el demo de U1 (*fuente-vieja*) se resuelve con una regla → no demostraba agencia. Reencuadre a "Knowledge Reliability Agent" (`definicion.md` v2). Refinamiento del usuario: respetar **1-propósito-por-unidad**; no enterrar scope diferido en una unidad "agendada".
+**Decisión (forward-only, ratchet-legal — NO se reabre Inception):** loop-back deliberado en la cascada (el framework lo permite, HITL). Re-scope de unidades: **U1** = sustrato determinista (intacto); **U2** = Investigador Agéntico (contradictorios + loop + RAG externo propio [ADR-008] + eval del agente + *definir* política de autonomía); **U3** = Credibilidad (2º paciente AnythingLLM + faithfulness + robustez); **U4/backlog** = rama config + Experimenter + *demostrar* auto-config (diferido explícito, no oculto). El viejo "U2 = rama config" baja a U4/backlog. Las historias de U2 son nuevas → se generan en Requirements de U2 (Fase B); las viejas quedan como registro. `unit-of-work.md` lleva la nota de reconciliación (no reescritura); las unidades de Inception quedan como registro histórico.
+**Context**: Restaura la verdad #2 (pivote + re-scope). Siguiente: sub-cascada de Construction de U2.
+
+---
